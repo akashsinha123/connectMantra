@@ -43,10 +43,10 @@ angular.module('chatpayApp')
    };
 
 
-   this.submitComment = function(data){
+   this.getComment = function(data){
     var deferred = $q.defer();
     
-    $http.post('/api/submitComment.php', $.param(data))
+    $http.post('/api/getComment.php', $.param(data))
     .success(function(info){
       deferred.resolve(info);
     })
@@ -56,6 +56,5 @@ angular.module('chatpayApp')
 
     return deferred.promise;
    };
-   getComment
 	
   });

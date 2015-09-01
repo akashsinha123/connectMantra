@@ -8,7 +8,7 @@
  * Controller of the chatpayApp
  */
 angular.module('chatpayApp')
-  .controller('BlogDescCtrl', function ($scope, $location, $cookieStore, BlogService) {
+  .controller('BlogDescCtrl', function ($scope, $location, $cookieStore, BlogService, EmployeeService) {
 
   	$scope.blog = BlogService.blog;
 
@@ -72,9 +72,16 @@ angular.module('chatpayApp')
         .catch(function(err){
             
         });
+
+        
     }
 
-    $scope.submitComment = function(comment){
+    $scope.emplId = function(id){
+      EmployeeService.userId = id;
+    }
+
+
+    $scope.getComment = function(){
       var data = {
             sessionId : $cookieStore.get('sessionId'),
             blog_id: $scope.blog.blog_id
@@ -82,16 +89,16 @@ angular.module('chatpayApp')
 
         BlogService.getComment(data)
         .then(function(user){
-          console.log(user);
-            $scope.blogAddedMsg = user;
-            if ($scope.blogAddedMsg == "1 records UPDATED successfully" ) {
-            };
+          console.log(user.records);
+          $scope.comments = user.records;
+            
         })
         .catch(function(err){
             
         });
-    }
+    };
 
+    $scope.getComment();
 
   });
 
