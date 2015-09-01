@@ -1,0 +1,59 @@
+<employee-header></employee-header>
+<!-- Page Content -->
+<div class="container">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Projects at Mantralabs</div>
+
+      <!-- Table -->
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>View Details</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="project in projects | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
+            <td>{{project.name}}</td>
+            <td>{{project.desc}}</td>
+            <td><i class="fa fa-external-link IconHover" ng-click="projectId(project.id, project.name)"></i></td>
+            <td><i class="fa fa-trash IconHover" ng-click="DeleteProj(project.id,$index)"></i></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- /.Table -->
+      </div>
+      <br>
+
+        <button ng-click="toggleAddProj()" class="btn btn-primary">Add</button>
+        <add-employee visible="showAddProj">
+          <form class="addForm">
+            <fieldset>
+              <label>Name:</label>
+              <input type="text" class="addInput" ng-model="proje.name">
+
+              <label>Description:</label>
+              <input type="text" class="addInput" ng-model="proje.desc">
+            </fieldset>
+            <button type="button" ng-click="addProject(proje); toggleAddProj()" class="addButton">Add</button>
+          </form>
+        </add-employee>
+
+    
+    
+    <!-- Pagination -->
+      <div class="containerrr">
+        <div class="pagination">
+          <pagination total-items="projects.length" ng-model="currentPageee" items-per-page="pageSizeee"></pagination>
+        </div>
+      </div>
+            
+    <hr>
+    <!-- /.row -->
+    <employee-footer></employee-footer>
+
+</div>
+<!-- /.container -->

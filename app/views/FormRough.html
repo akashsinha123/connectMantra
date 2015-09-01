@@ -1,0 +1,502 @@
+<!-- Basci Structure -->
+
+<div id="wrapper">
+      <employee-header></employee-header>
+      <div id="page">
+        <employee-search></employee-search>
+        <div class="contentWrapper">
+          <div id="content">
+            <div class="box">
+              
+            </div>
+            <br class="clearfix" />
+          </div>
+      </div>
+        <br class="clearfix" />
+      </div>
+      <employee-bottompage></employee-bottompage>
+    </div>
+    <employee-footer></employee-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Function in the controller
+
+$scope.showAddModal = false;
+
+$scope.toggleAddEmployee = function(){
+    $scope.showAddModal = !$scope.showAddModal;
+}; 
+
+-->
+
+
+
+<!-- dorective Template -->
+
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Fill in the required fields</h4>
+      </div>
+      <div class="modal-body" ng-transclude></div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- directive
+
+
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name chatpayApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the chatpayApp
+ */
+angular.module('chatpayApp')
+  .directive('addEmployee', function ($location, $cookieStore, EmployeeService) {
+    return {
+      restrict: 'E',
+      transclude: true,
+        replace:true,
+      scope: true,
+      templateUrl: 'views/directives/add-employee.html',
+      link: function postLink(scope, element, attrs) {
+          scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+
+
+        
+
+
+      }
+    }
+    
+
+
+  });
+
+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button ng-click="toggleAddEmployee()" class="btn btn-default">Add</button>
+
+<add-employee visible="showAddModal">
+              
+
+              <form class="addForm">
+      
+                <h1>Sign Up</h1>
+                
+                <fieldset>
+                  <legend><span class="number">1</span>Your basic info</legend>
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="user_name" class="addInput">
+                  
+                  <label for="mail">Email:</label>
+                  <input type="email" id="mail" name="user_email" class="addInput">
+                  
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="user_password" class="addInput">
+                  
+                </fieldset>
+                
+                <fieldset>
+                  <legend><span class="number">2</span>Your profile</legend>
+                  <label for="bio">Biography:</label>
+                  <textarea id="bio" name="user_bio"></textarea>
+                </fieldset>
+                <fieldset>
+                <label for="job">Job Role:</label>
+                <select id="job" name="user_job" class="addInput">
+                  <optgroup label="Web">
+                    <option value="frontend_developer">Front-End Developer</option>
+                    <option value="php_developor">PHP Developer</option>
+                    <option value="python_developer">Python Developer</option>
+                    <option value="rails_developer"> Rails Developer</option>
+                    <option value="web_designer">Web Designer</option>
+                    <option value="WordPress_developer">WordPress Developer</option>
+                  </optgroup>
+                  <optgroup label="Mobile">
+                    <option value="Android_developer">Androild Developer</option>
+                    <option value="iOS_developer">iOS Developer</option>
+                    <option value="mobile_designer">Mobile Designer</option>
+                  </optgroup>
+                  <optgroup label="Business">
+                    <option value="business_owner">Business Owner</option>
+                    <option value="freelancer">Freelancer</option>
+                  </optgroup>
+                  <optgroup label="Other">
+                    <option value="secretary">Secretary</option>
+                    <option value="maintenance">Maintenance</option>
+                  </optgroup>
+                </select>
+                
+                  <label>Interests:</label>
+                  <input type="checkbox" id="development" value="interest_development" name="user_interest"><label class="light" for="development">Development</label><br>
+                    <input type="checkbox" id="design" value="interest_design" name="user_interest"><label class="light" for="design">Design</label><br>
+                  <input type="checkbox" id="business" value="interest_business" name="user_interest"><label class="light" for="business">Business</label>
+                
+                </fieldset>
+                <button type="submit" class="addButton">Sign Up</button>
+              </form>
+
+
+            </add-employee>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Select Options -->
+
+
+<add-employee visible="showAddlang">
+                <form class="addForm">
+                  <label for="job">Choose Language:</label><p>To choose multiple languages press ctrl/command and select</p>
+                  <select id="job" class="addInput" multiple ng-model="selectedValues">
+                    <option ng-repeat="lang in allLanguages" value="{{lang.id}}" ng-click="selected(selectedValues)">{{lang.name}}</option>
+                  </select>
+                  <h3 ng-show="showSuccessAddLangMsg">Added Successfully</h3>
+                  <!-- <ul>
+                    <li ng-repeat="languag in selectedValues">{{languag}}</li>
+                  </ul> -->
+                </fieldset>
+                  <button type="button" ng-click="addLang()" class="addButton">Add</button>
+                </form>
+              </add-employee>
+
+
+
+   $scope.selected = function(nowSelected){
+   
+       $scope.selectedValues = [];
+       if( ! nowSelected ){
+        return;
+        }
+        angular.forEach(nowSelected, function(val){
+               $scope.selectedValues.push(val);
+           });
+    };
+
+    $scope.addLang =  function(){
+
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+            id: EmployeeService.userId,
+            langId : $scope.selectedValues
+        }
+        EmployeeService.addEmpLang(data)
+        .then(function(user){
+            $scope.langAddedMsg = user;
+            if ($scope.langAddedMsg == "1 records UPDATED successfully" ) {$scope.showSuccessAddLangMsg = true;};
+            
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- users format -->
+
+0: Object
+$$hashKey: "004"
+seed: "6c7974edb98e440"
+user: Object
+SSN: "556-83-1538"
+cell: "(221)-248-3572"
+dob: "90367056"
+email: "shelly.schmidt60@example.com"
+gender: "female"
+location: Object
+md5: "107623ef52b7949d66cc7f2b0cdd3cbb"
+name: Object
+password: "solo"
+phone: "(304)-307-4969"
+picture: "http://api.randomuser.me/portraits/women/42.jpg"
+registered: "1228666027"
+salt: "KeJyupuK"
+sha1: "87c3c41a8626ee1d588208ef8a1941e68e13c74f"
+sha256: "2c50650d4a1d04eff6724ad577f63fb41c48c20e6a79c11f1b7105603a9a5bde"
+username: "heavyelephant761"
+__proto__: Object
+version: "0.4"
+__proto__: Object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- error in blogs post -->
+
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name chatpayApp.controller:HomeCtrl
+ * @description
+ * # HomeCtrl
+ * Controller of the chatpayApp
+ */
+angular.module('chatpayApp')
+  .filter('startFrom', function(){
+    return function(data, start, isEnable){
+        if (isEnable) {
+            return data.slice(start);
+        }else{
+            return data;
+        }
+        
+    }
+  })
+  .controller('BlogsCtrl', function ($scope, $location, $cookieStore, EmployeeService, BlogService) {
+
+    $scope.pageSize = 3;
+    $scope.currentPage = 1;
+    $scope.isEnable = true;
+
+    $scope.charactersLimit = 210;
+
+    $scope.search = function() {
+        $scope.isEnable = false;
+        $scope.pageSize = $scope.blogs.length;
+    };
+
+    $scope.showAddBlog = false;
+
+    $scope.toggleAddBlog = function(){
+        $scope.showAddBlog = !$scope.showAddBlog;
+    }
+
+
+    $scope.date = new Date();
+    $scope.date = $scope.date.toDateString();
+
+
+    $scope.addBlog =  function(blog){
+
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+            name : blog.blog_name,
+            description : blog.description,
+            created : $scope.date
+        }
+        EmployeeService.addBlog(data)
+        .then(function(user){
+            $scope.blogAddedMsg = user;
+            if ($scope.blogAddedMsg == "1 records UPDATED successfully" ) {};
+            
+        })
+        .catch(function(err){
+            
+        });
+
+        var data2 = {
+            sessionId : $cookieStore.get('sessionId'),
+            id: $cookieStore.get('userId')
+        }
+        console.log(data2);
+
+        EmployeeService.addUserBlogRel(data2)
+        .then(function(user){
+
+            
+        })
+        .catch(function(err){
+            
+        });
+
+        blog.name = $cookieStore.get('userName');
+        blog.blog_created = $scope.date;
+        $scope.blogs.push(blog); 
+    };
+
+    $scope.getBlogs = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.getBlogs(data)
+        .then(function(user){
+            $scope.blogs = user.records;
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.blogId = function(blog){
+        BlogService.blog = blog;
+    }
+
+    $scope.getBlogs();
+
+  });
+
+
+
+
+
+<!-- each blog -->
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name chatpayApp.controller:HomeCtrl
+ * @description
+ * # HomeCtrl
+ * Controller of the chatpayApp
+ */
+angular.module('chatpayApp')
+  .controller('BlogDescCtrl', function ($scope, $location, $cookieStore, BlogService) {
+
+    $scope.blog = BlogService.blog;
+
+
+    $scope.showEditBlog = false;
+
+    $scope.toggleEditBlog = function(){
+        $scope.showEditBlog = !$scope.showEditBlog;
+    }
+
+    $scope.blog2 = $scope.blog;
+
+    $scope.editBlog =  function(blog){
+
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+            name : blog.blog_name,
+            description : blog.description,
+            id: $cookieStore.get('userId')
+        }
+        BlogService.editBlog(data)
+        .then(function(user){
+            $scope.blogAddedMsg = user;
+            if ($scope.blogAddedMsg == "1 records UPDATED successfully" ) {
+
+            };
+            
+        })
+        .catch(function(err){
+            
+        });
+
+
+        $scope.blog.blog_name = blog.blog_name;
+        $scope.blog.description = blog.description;
+      
+        
+    };
+
+  });

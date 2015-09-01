@@ -1,0 +1,106 @@
+<div id="wrapper">
+      <employee-header></employee-header>
+      <div id="page">
+        <div class="contentWrapper">
+          <div id="content">
+            <div class="box" ng-repeat="user in users | filter : employeeDir.name | filter : employeeDir.gender : true | filter : employeeDir.bloodGroup">
+              <h1><a href="#/employee/{{user.id}}" ng-click="userId(user.id)">{{user.name}}</a></h1>
+              <h4>Mobile: {{user.mobile}}</h4>
+              <h4>Emergency: {{user.emergency_contact_no}}</h4>
+            </div>
+
+            <button ng-click="toggleAddEmpl()" class="btn btn-default">Add</button>
+              <add-employee visible="showAddEmp">
+                <form class="addForm">
+                  <fieldset>
+                    <legend><span class="number">1</span>Your basic info</legend>
+                    <label>Employee Id:</label>
+                    <input type="text" class="addInput" ng-model="user.employeeId">
+
+                    <label>Name:</label>
+                    <input type="text" class="addInput" ng-model="user.name">
+                    
+                    <label>Number:</label>
+                    <input type="text" class="addInput" ng-model="user.number">
+                    
+                    <label>Emergency Number:</label>
+                    <input type="text" class="addInput" ng-model="user.emergencyNumber">
+                    
+                    <label>Birthday as of Certificate:</label>
+                    <input type="text" class="addInput" ng-model="user.birthday">
+
+                    <label>Original Birthday:</label>
+                    <input type="text" class="addInput" ng-model="user.birthdayOrig">
+                    
+                    <label>Gender:</label>
+                    <input type="radio" class="addInput" ng-model="user.gender" value="Male">Male
+                    <input type="radio" class="addInput" ng-model="user.gender" value="Female">Female
+
+                    <label>Blood Group:</label>
+                    <input type="text" class="addInput" ng-model="user.bloodGroup">
+
+                    <label>Present Address:</label>
+                    <input type="text" class="addInput" ng-model="user.presentAddress">
+
+                    <label>Permanent Address:</label>
+                    <input type="text" class="addInput" ng-model="user.permanentAddress">
+                    
+                    <label>Correspondence Address:</label>
+                    <input type="text" class="addInput" ng-model="user.correspondenceAddress">
+
+                    <label>PAN NO:</label>
+                    <input type="text" class="addInput" ng-model="user.pan_no">
+                    
+                    <label>Father's/husband's Name:</label>
+                    <input type="text" class="addInput" ng-model="user.F_H_name">
+                  </fieldset>
+                  <h3 ng-show="showSuccessAddEmplMsg">Added Successfully</h3>
+                  <button type="button" ng-click="addEmployee(user); toggleAddEmpl()" class="addButton">Add</button>
+                </form>
+              </add-employee>
+              <button ng-click="toggleDeleteEmpl()" class="btn btn-default">Delete</button>
+              <add-employee visible="showDeleteEmpl">
+                <form class="addForm">
+                  <label for="job">Choose Employee:</label><p>To choose multiple languages press ctrl/command and select</p>
+                  <select id="job" class="addInput" multiple="true" ng-options="empl as empl.name for empl in users" ng-model="emplye">
+                  </select>
+                  <ul>
+                    <li ng-repeat="lan in emplye">{{lan.name}}</li>
+                  </ul>
+                  <h3 ng-show="showSuccessDeleteEmplMsg">Deleted Successfully</h3>
+                </fieldset>
+                  <button type="button" ng-click="DeleteEmpl(emplye); toggleDeleteEmpl()" class="addButton">Delete</button>
+                </form>
+              </add-employee>
+              <nav class="pagiCenter">
+                <ul class="pagination PagCen">
+                  <li>
+                    <a href="#/employees" ng-click="getUsers(0)" aria-label="First">
+                      <span aria-hidden="true">&laquo; First</span>
+                    </a>
+                  </li>
+                  <li><a href="#/employees">1</a></li>
+                  <li><a href="#/employees">2</a></li>
+                  <li><a href="#/employees">3</a></li>
+                  <li><a href="#/employees">4</a></li>
+                  <li><a href="#/employees">5</a></li>
+                  <li><a href="#/employees">6</a></li>
+                  <li><a href="#/employees">7</a></li>
+                  <li><a href="#/employees">8</a></li>
+                  <li><a href="#/employees">9</a></li>
+                  <li><a href="#/employees">10</a></li>
+                  <li>
+                    <a href="#/employees" ng-click="getUsers(45)" aria-label="Last">
+                      <span aria-hidden="true">Last &raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            <br class="clearfix" />
+          </div>
+      </div>
+        <br class="clearfix" />
+      </div>
+      <employee-bottompage></employee-bottompage>
+    </div>
+    <employee-footer></employee-footer>

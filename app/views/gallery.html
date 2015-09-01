@@ -1,0 +1,31 @@
+<div id="wrapper">
+  <employee-header></employee-header>
+  <div id="page">
+    <employee-search></employee-search>
+    <div class="contentWrapper">
+      <div id="content">
+        <div class="Wrapperbox">
+
+        <div id="albumImage">
+          <img ng-src="{{currentImage.image}}" width="610px" height="360">
+        </div>
+
+        <div class="thumbWrapper">
+          
+          <ul id="thumbList">
+            <li ng-repeat="image in images" ng-click="setCurrentImage(image)">
+              <img ng-src="{{image.image}}" width="50px" height="40px">
+            </li>
+          </ul>
+
+        </div>
+        
+        </div>
+
+      </div>
+  </div>
+    <br class="clearfix" />
+  </div>
+  <employee-bottompage></employee-bottompage>
+</div>
+<employee-footer></employee-footer>

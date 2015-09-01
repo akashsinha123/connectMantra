@@ -1,0 +1,106 @@
+<employee-header></employee-header>
+
+<!-- Page Content -->
+    <div class="container">
+
+      
+      <div id="content">
+            <div class="box">
+              <div class="row">
+                    
+                <div class="col-sm-6 col-md-8">
+                        <h2>{{projectName}}</h2>
+                        <h4>{{projectDesc.description}}</h4>
+                </div>
+            </div>
+            <br><br>
+            <div class="box">
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Employees Involved</div>
+
+                <!-- Table -->
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="emp in projectEmployees | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
+                      <td><p ng-click="userId(emp.id)"><a href="#/employee/{{emp.id}}">{{emp.name}}</a></p></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /.Table -->
+              </div>
+              <br>
+            </div>
+            <!-- Pagination -->
+            <div class="containerrr">
+              <div class="pagination">
+                <pagination total-items="projectEmployees.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
+              </div>
+            </div>
+            <br><br>
+            <div class="box">
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Languages Involved:</div>
+
+                <!-- Table -->
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="lang in projectLang | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
+                      <td><p ng-click="langId(lang.id, lang.name, lang.desc)"><a href="#/language/{{lang.id}}">{{lang.name}}</a></p></td>
+                      <td><i class="fa fa-trash IconHover" ng-click="deleteLang(lang.id, $index)"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /.Table -->
+              </div>
+              <br>
+
+              <button ng-click="toggleAddProject(); getAllProjectLang()" class="btn btn-primary">Add</button>
+              <add-employee visible="showAddProject">
+                <form class="addForm">
+                  <fieldset>
+                    <label for="job">Choose Language:</label><p>To choose multiple languages press ctrl/command and select</p>
+                    <select id="job" class="addInput" multiple="true" ng-options="lang as lang.name for lang in remainingLang" ng-model="remLang">
+                    </select>
+                    <ul>
+                      <li ng-repeat="lan in remLang">{{lan.name}}</li>
+                    </ul>
+                  </fieldset>
+                  <h3 ng-show="showSuccessAddLangMsg">Added Successfully</h3>
+                  <button type="button" ng-click="addLanguage(remLang); toggleAddProject()" class="addButton">Add</button>
+                </form>
+              </add-employee>
+            </div>
+            <!-- Pagination -->
+            <div class="containerrr">
+              <div class="pagination">
+                <pagination total-items="projectLang.length" ng-model="currentPageee" items-per-page="pageSizeee"></pagination>
+              </div>
+            </div>
+
+          </div>
+
+
+      <employee-footer></employee-footer>
+    </div>
+<!-- /.container -->
+
+
+
+
+
+
+
+

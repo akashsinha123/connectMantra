@@ -1,0 +1,20 @@
+
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+	<div>Connect<span>Mantra</span></div>
+</div>
+<br>
+<div class="signup">
+	<form>
+		<input type="text" placeholder="name" id="users_Name" name="user" ng-model="user.name" required><br>
+		<input type="text" placeholder="username" name="username" ng-model="user.username" required><br>
+		<input type="text" placeholder="xyz@mantralabsglobal.com" id="users_email" name="email_id" ng-model="user.email_id" required><br>
+		<input type="password" placeholder="password" name="password" ng-model="user.password"><br>
+		<input type="password" placeholder="confirm password" name="confirm password" ng-model="user.confirmPassword"><br>
+		<input id="signUp" type="button" ng-click="signUp()" value="Sign Up">
+		<input type="button" ng-click="backToLogin()" value="Back To Login Page">
+		<p ng-show="signUpSuccess">{{signUpMessage}}</p>
+		<p ng-show="passwordError">{{spasswordErrorMessage}}</p>
+	</form>
+</div>
