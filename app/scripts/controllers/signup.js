@@ -30,7 +30,7 @@ angular.module('chatpayApp')
                     
                 $scope.signUpSuccess = true;
                 $scope.passwordError = null;
-                $scope.signUpMessage = user;
+                $scope.signUpMessage = user.message;
                 };
                 
             })

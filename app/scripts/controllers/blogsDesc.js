@@ -10,10 +10,10 @@
 angular.module('chatpayApp')
   .controller('BlogDescCtrl', function ($scope, $location, $cookieStore, BlogService, EmployeeService) {
 
-  	$scope.blog = BlogService.blog;
+    $scope.blog = BlogService.blog;
 
 
-  	$scope.showEditBlog = false;
+    $scope.showEditBlog = false;
 
     $scope.toggleEditBlog = function(){
         $scope.showEditBlog = !$scope.showEditBlog;
@@ -72,6 +72,8 @@ angular.module('chatpayApp')
         .catch(function(err){
             
         });
+
+        $scope.comments.push(data);
 
         
     }
