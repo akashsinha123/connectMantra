@@ -24,13 +24,16 @@ angular.module('chatpayApp')
             }
             LoginService.signup(data)
             .then(function(user){
-                if (user.message == "You've Successfully Signed up") {
-                    $location.path('/login');
-                }else{
-                    
+                console.log(user);
+                if (user.records[0].message == "You've Successfully Signed up") {
                 $scope.signUpSuccess = true;
                 $scope.passwordError = null;
-                $scope.signUpMessage = user.message;
+                $scope.signUpMessage = "You've Successfully Signed up";
+
+                }else if(user.records[0].message == "username already exists"){
+                    $scope.signUpSuccess = true;
+                    $scope.passwordError = null;
+                    $scope.signUpMessage = user.records.message;
                 };
                 
             })

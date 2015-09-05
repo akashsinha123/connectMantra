@@ -14,18 +14,89 @@ angular.module('chatpayApp')
     this.userId = "";
    
    this.getUsers = function(data){
-    var deferred = $q.defer();
+
+
+
+    var getUsers = $q.defer();
     
     $http.post('/api/employees.php', $.param(data))
     .success(function(info){
-      deferred.resolve(info);
+      getUsers.resolve(info);
     })
     .error(function(err){
-      deferred.reject(err);
+      getUsers.reject(err);
     });
 
-    return deferred.promise;
+    var getUsersLang = $q.defer();
+    
+    $http.post('/api/employeeLang.php', $.param(data))
+    .success(function(info){
+      getUsersLang.resolve(info);
+    })
+    .error(function(err){
+      getUsersLang.reject(err);
+    });
+
+    var getUsersProject = $q.defer();
+    
+    $http.post('/api/employeeProject.php', $.param(data))
+    .success(function(info){
+      getUsersProject.resolve(info);
+    })
+    .error(function(err){
+      getUsersProject.reject(err);
+    });
+
+
+    getUsers.promise.then(function(res){
+      //console.log(res);
+    });
+
+    getUsersLang.promise.then(function(res){
+      //console.log(res);
+    });
+
+    getUsersProject.promise.then(function(res){
+      //console.log(res);
+    });
+
+
+    var bothPromise = $q.all([getUsers.promise, getUsersLang.promise, getUsersProject.promise]);
+
+    bothPromise.then(function(results){
+      //console.log(results);
+      
+
+    }, function(){
+
+    });
+
+
+    return bothPromise;
+
+
+
+
+
+
    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    this.count = function(data){
     var deferred = $q.defer();

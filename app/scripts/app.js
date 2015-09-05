@@ -84,14 +84,24 @@ angular
         controller: 'ProjectInfoCtrl',
         //resolve: resolve
       })
-      .when('/gallery', {
-        templateUrl: 'views/gallery.html',
-        controller: 'GalleryCtrl',
+      .when('/suggestions', {
+        templateUrl: 'views/suggestions.html',
+        controller: 'SuggestionCtrl',
+        //resolve: resolve
+      })
+      .when('/suggestions/:id', {
+        templateUrl: 'views/suggestionDesc.html',
+        controller: 'SuggestionDescCtrl',
         //resolve: resolve
       })
       .when('/ask', {
         templateUrl: 'views/ask.html',
         controller: 'AskCtrl',
+        //resolve: resolve
+      })
+      .when('/ask/:id', {
+        templateUrl: 'views/askDesc.html',
+        controller: 'AskdescCtrl',
         //resolve: resolve
       })
       .when('/myCarousel', {

@@ -24,6 +24,8 @@ angular.module('chatpayApp')
     $scope.currentPageee = 1;
     $scope.isEnableee = true;
     
+    $scope.charactersLimit = 30;
+
     $scope.getLang = function(){
         
         var data = {
@@ -37,6 +39,7 @@ angular.module('chatpayApp')
             
         });
     }
+
 
     $scope.showAddlang = false;
 

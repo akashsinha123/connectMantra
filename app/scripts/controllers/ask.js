@@ -8,7 +8,7 @@
  * Controller of the chatpayApp
  */
 angular.module('chatpayApp')
-  .filter('startFrom', function(){
+  .filter('startFrommm', function(){
     return function(data, start, isEnable){
         if (isEnable) {
             return data.slice(start);
@@ -18,132 +18,41 @@ angular.module('chatpayApp')
         
     }
   })
-  .controller('AskCtrl', function ($scope, $location, $cookieStore, EmployeeService, $rootScope) {
+  .controller('AskCtrl', function ($scope, $location, $cookieStore, EmployeeService, $rootScope, AskService, LanguageService) {
 
-    $scope.pageSize = 6;
-    $scope.currentPage = 1;
-    $scope.isEnable = true;
+    $scope.pageSizeee = 10;
+    $scope.currentPageee = 1;
+    $scope.isEnableee = true;
 
-    $scope.showAddEmp = false;
-    $scope.showDeleteEmpl = false;
+    $scope.showUnAnswered = function(){
+        $scope.unAnsweredCount = "showMePlease";
+    };
+
+    $scope.showAllQuestions = function(){
+        $scope.unAnsweredCount = "0";
+    };
+
+    
+
+    $scope.showAddQues = false;
 
     $scope.search = function() {
-        $scope.isEnable = false;
-        $scope.pageSize = $scope.users.length;
+        $scope.isEnableee = false;
+        $scope.pageSizeee = $scope.questions.length;
+    };
+
+    $scope.toggleAddQues = function(){
+        $scope.showAddQues = !$scope.showAddQues;
     }
 
-    $scope.toggleAddEmpl = function(){
-        $scope.showAddEmp = !$scope.showAddEmp;
-    }
-
-    $scope.toggleDeleteEmpl = function(){
-        $scope.showDeleteEmpl = !$scope.showDeleteEmpl;
-    }
-
-    
-    $scope.user = {
-        employeeId : "",
-        name : "",
-        number : "",
-        emergencyNumber : "",
-        birthday : "",
-        birthdayOrig : "",
-        bloodGroup : "",
-        presentAddress : "",
-        permanentAddress : "",
-        correspondenceAddress : "",
-        employeeId : "",
-        pan_no : "",
-        F_H_name : ""
-    }
-
-    $scope.addEmployee = function(user){
-        
-        var Data = {
-            employeeId : $scope.user.employeeId,
-            name : $scope.user.name,
-            number : $scope.user.number,
-            emergencyNumber : $scope.user.emergencyNumber,
-            birthday : $scope.user.birthday,
-            birthdayOrig : $scope.user.birthdayOrig,
-            bloodGroup : $scope.user.bloodGroup,
-            gender : $scope.user.gender,
-            presentAddress : $scope.user.presentAddress,
-            permanentAddress : $scope.user.permanentAddress,
-            correspondenceAddress : $scope.user.correspondenceAddress,
-            pan_no : $scope.user.pan_no,
-            F_H_name : $scope.user.F_H_name,
-            sessionId : $cookieStore.get('sessionId')
-        };
-
-
-        EmployeeService.addEmployee(Data)
-        .then(function(user){
-            if (user == "1 records UPDATED successfully" ) {$scope.showSuccessAddEmplMsg = true;};
-            
-        })
-        .catch(function(err){
-            
-        });
-
-        var user = {
-            name : $scope.user.name,
-            mobile : $scope.user.number,
-            emergency_contact_no : $scope.user.emergencyNumber
-        }
-
-        $scope.users.push(user);
-
-    }
-
-    $scope.DeleteEmpl = function(id, index){
-
-        bootbox.confirm("Are you sure you want to delete this employee?", function(answer){
-            if (answer == true) {
-                $scope.isEnable = false;
-                var data = {
-                    sessionId : $cookieStore.get('sessionId'),
-                    emplId : id
-                }
-                console.log(data);
-                EmployeeService.deleteEmpl(data)
-                .then(function(user){
-                    console.log(user);
-                    if (user == "1 records UPDATED successfully" ) {
-                        $scope.showSuccessDeleteEmplMsg = true;
-                        bootbox.alert("Employee Deleted");
-                    }else{
-                        bootbox.alert("Cannot delete the Emlpoyee due to RDBMS");
-                    };
-                })
-                .catch(function(err){
-                    
-                });
-                $scope.users.splice(index,1);
-            };
-        })
-        $scope.isEnable = true;
-    }
-
-    
-
-    $scope.getUsers = function(){
+    $scope.getLang = function(){
         
         var data = {
             sessionId : $cookieStore.get('sessionId')
         }
-
-        EmployeeService.count(data)
+        LanguageService.getLang(data)
         .then(function(user){
-            $scope.count = user.records[0].count;
-            $scope.pages = Math.ceil($scope.count / 5); 
-        })
-        .catch(function(err){
-            
-        });
-        EmployeeService.getUsers(data)
-        .then(function(user){
-            $scope.users = user.records;
+            $scope.languages = user.records;
         })
         .catch(function(err){
             
@@ -151,12 +60,148 @@ angular.module('chatpayApp')
     }
 
 
+    $scope.getQuestions = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        AskService.getQuestions(data)
+        .then(function(user){
+            $scope.questions = user[0].records;
+            $scope.ques_lang_relation = user[1].records;
+            $scope.countAns = user[2].records;
 
-    $scope.userId = function(id){
-        EmployeeService.userId = id;
+            angular.forEach($scope.questions, function(val){
+                val.tag = [];
+                val.count = 0;
+                val.showUnAns = "showMePlease";
+                angular.forEach($scope.ques_lang_relation, function(pal){
+                    if (val.que_id == pal.ques_id) {
+                        val.tag.push(pal.lang_name);
+                     };
+                });
+                angular.forEach($scope.countAns, function(kal){
+                    if (val.question == kal.question) {
+                        val.count = kal.count;
+                        val.showUnAns = "";
+                     };
+                });
+            });
+        })
+        .catch(function(err){
+            
+        });
     }
 
-    $scope.getUsers();
+    $scope.date = new Date();
+    $scope.date = $scope.date.toDateString();
 
+    $scope.addQues =  function(lang){
+
+
+        var langIdArray = [];
+        angular.forEach(lang.sourc, function(val){
+            langIdArray.push(val.id);
+        });
+
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+            question : lang.question,
+            created : $scope.date
+        }
+        AskService.addQues(data)
+        .then(function(user){
+            var data4 = {
+                sessionId : $cookieStore.get('sessionId')
+            }
+
+            AskService.getMaxQuesId(data4)
+            .then(function(user){
+                $scope.maxId = user;
+                var data2 = {
+                    sessionId : $cookieStore.get('sessionId'),
+                    id: $cookieStore.get('userId'),
+                    max_Id : $scope.maxId
+                }
+                console.log("data2",data2)
+                AskService.addUserQuesRel(data2)
+                .then(function(user){
+                    console.log("UserQuesRel", user)
+                })
+                .catch(function(err){
+                    
+                });
+
+                var data3 = {
+                    sessionId : $cookieStore.get('sessionId'),
+                    id: langIdArray,
+                    max_Id : $scope.maxId
+                }
+                console.log("data3",data3)
+
+                AskService.addQuesTagRel(data3)
+                .then(function(user){
+                    console.log("QuesTagRel", user)
+                })
+                .catch(function(err){
+                    
+                });
+            
+            })
+            .catch(function(err){
+                
+            });
+
+
+        })
+        .catch(function(err){
+            
+        });
+
+        
+
+        lang.name = $cookieStore.get('userName');
+        lang.ques_created = $scope.date;
+        lang.tag = [];
+        for (var i = 0; i < lang.sourc.length; i++) {
+            lang.tag.push(lang.sourc[i].name);
+        };
+
+        $scope.questions.push(lang);
+    };
+    
+
+    $scope.emplId = function(id){
+      EmployeeService.userId = id;
+    }
+
+    $scope.queId = function(que){
+        AskService.ques = que;
+    }
+
+    $scope.getQuestions();
+    $scope.getLang();
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

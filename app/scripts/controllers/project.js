@@ -24,6 +24,8 @@ angular.module('chatpayApp')
     $scope.currentPageee = 1;
     $scope.isEnableee = true;
 
+    $scope.charactersLimit = 30;
+
     $scope.getProjects = function(){
         
         var data = {
@@ -94,6 +96,8 @@ angular.module('chatpayApp')
                     if (user == "1 records UPDATED successfully" ) {
                         bootbox.alert("Project Deleted");
                         $scope.projects.splice(ind, 1);
+                    }else{
+                        bootbox.alert("Cannot Delete Project Due to RDBMS");
                     };
                 })
                 .catch(function(err){

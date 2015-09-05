@@ -81,7 +81,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr bgcolor="#eee" ng-repeat-start="user in users | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize | filter : employeeDir.name | filter : employeeDir.gender : true | filter : employeeDir.bloodGroup" ng-click="showDetail(user)" ng-class-odd="'alt'">
+              <tr bgcolor="#eee" ng-repeat-start="user in users | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize | filter : employeeDir.name | filter : employeeDir.gender : true | filter : employeeDir.bloodGroup | filter : employeeDir.languagesKnown | filter : employeeDir.projectsInvolved" ng-click="showDetail(user)" ng-class-odd="'alt'">
                 <td class="col-xs-1"><img src="../images/project_pic01.jpg" class="img-thumbnail img-responsive img-circle"></td> 
                 <td class="col-xs-2 cap">{{user.name}}</td> 
                 <td class="col-xs-2 cap">{{user.mobile}}</td>
@@ -110,7 +110,7 @@
                     <div>
                         <i class="fa fa-trash IconHover" ng-click="DeleteEmpl(user.id, $index)"></i>
                         <br><br><br><br><br><br>
-                        <button type="button" ng-click="userId(user.id)" class="btn btn-primary">Full Profile</button>
+                        <button type="button" ng-click="userId(user)" class="btn btn-primary">Full Profile</button>
                     </div>
                     <div class="col-xs-12"><hr class="EmpHr"></div>
                   </div>

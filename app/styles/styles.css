@@ -550,6 +550,20 @@ a:hover{
 }
 
 
+/*carousel*/
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
 
 
 
@@ -581,7 +595,33 @@ body {
     transition: all .2s ease-in-out;
 }
 
+#FloatRight{
+  max-width: 220px;
+  width: auto;
+  float: right;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+#FloatLeft{
+  max-width: 220px;
+  width: auto;
+  float: left;
+  margin-left: 20px;
+  margin-right: 10px;
+}
 
+#LeftMargin{
+  margin-left: 20px;
+}
+
+.bottomMarg{
+  float: left;
+  margin-bottom: 10px;
+}
+
+.bottomMarggg{
+  margin-top: 20px;
+}
 
 #loader {
   position:absolute;
@@ -601,4 +641,43 @@ body {
 
 #LimitPara{
   width: 160px;
+}
+
+/*Code Editor*/
+
+#editor {
+        position: relative;
+        width: 800px;
+        height: auto;
+        min-height: 400px;
+    }
+
+#AnswerA{
+  height: auto;
+  min-height: 100px;
+  background-color: #D4D4D4;
+  padding: 10px;
+}
+
+#AnswerB{
+  height: auto;
+  min-height: 60px;
+  background-color: #D4D4D4;
+  padding: 10px;
+}
+
+#AnswerC{
+  height: auto;
+  min-height: 60px;
+  background-color: #D4D4D4;
+  padding: 10px;
+}
+
+.glyphicon.glyphicon-thumbs-up {
+    font-size: 40px;
+    color: #f05f40;
+}
+.glyphicon.glyphicon-thumbs-down {
+    font-size: 40px;
+    color: #f05f40;
 }

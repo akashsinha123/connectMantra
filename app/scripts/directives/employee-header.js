@@ -24,6 +24,7 @@ angular.module('chatpayApp')
 			  }
 			};
 
+			scope.user_name = $cookieStore.get('userName');
 
 			scope.logout = function(){
 				var data = {

@@ -11,12 +11,12 @@
                         <img src="images/project_pic01.jpg" alt="" class="img-rounded img-responsive" />
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h2>{{userInfo.name}}</h2>
-                        <h4>Number: {{userInfo.mobile}}</h4>
-                        <h4>Emergency Number: {{userInfo.emergency_contact_no}}</h4>
-                        <h4>Email: {{userInfo.email}}</h4>
-                        <h4>Date of Birth: {{userInfo.dof_certificate}}</h4>
-                        <h4>Blood Group: {{userInfo.blood_group}}</h4>
+                        <h2>{{userrr.name}}</h2>
+                        <h4>Number: {{userrr.mobile}}</h4>
+                        <h4>Emergency Number: {{userrr.emergency_contact_no}}</h4>
+                        <h4>Email: {{userrr.email}}</h4>
+                        <h4>Date of Birth: {{userrr.dob}}</h4>
+                        <h4>Blood Group: {{userrr.blood_group}}</h4>
                         <!-- Split button -->
                     </div>
                 </div>
@@ -26,19 +26,19 @@
               <div>
                 <span><b>Present Address</b></span><br />
                 <p id="LimitPara">
-                  {{userInfo.present_address}}
-                  {{userInfo.city}}
-                  {{userInfo.zipCode}}</p>
+                  {{userrr.address}}
+                  {{userrr.city}}
+                  {{userrr.zipCode}}</p>
                 
                 
               </div>
               <div>
                 <span><b>Permanent Address</b></span><br />
-                <p id="LimitPara">{{userInfo.permanent_address}}</p>
+                <p id="LimitPara">{{userrr.permanent_address}}</p>
               </div>
               <br>
             
-              <button ng-click="toggleAddEmployee(userInfo.name, userInfo.mobile, userInfo.emergency_contact_no, userInfo.dof_certificate, userInfo.blood_group, userInfo.present_address, userInfo.permanent_address)" class="btn btn-primary">Edit</button>
+              <button ng-click="toggleAddEmployee(userrr.name, userrr.mobile, userrr.emergency_contact_no, userrr.dob, userrr.blood_group, userrr.address, userrr.permanent_address)" class="btn btn-primary">Edit</button>
               <add-employee visible="showAddModal">
                 <form class="addForm">
                   
@@ -48,25 +48,25 @@
                     <input type="text" class="addInput" ng-model="user.name">
                     
                     <label>Number:</label>
-                    <input type="text" class="addInput" ng-model="user.number">
+                    <input type="text" class="addInput" ng-model="user.mobile">
                     
                     <label>Emergency Number:</label>
-                    <input type="text" class="addInput" ng-model="user.emergencyNumber">
+                    <input type="text" class="addInput" ng-model="user.emergency_contact_no">
                     
                     <label>Birthday:</label>
-                    <input type="text" class="addInput" ng-model="user.birthday">
+                    <input type="text" class="addInput" ng-model="user.dob">
 
                     <label>Blood Group:</label>
-                    <input type="text" class="addInput" ng-model="user.bloodGroup">
+                    <input type="text" class="addInput" ng-model="user.blood_group">
 
                     <label>Present Address:</label>
-                    <input type="text" class="addInput" ng-model="user.presentAddress">
+                    <input type="text" class="addInput" ng-model="user.address">
 
                     <label>Permanent Address:</label>
-                    <input type="text" class="addInput" ng-model="user.permanentAddress">
+                    <input type="text" class="addInput" ng-model="user.permanent_address">
                     <h3 ng-show="showSuccessUpdateMsg">Updated Successfully</h3>
                   </fieldset>
-                  <button type="button" ng-click="Update()" class="addButton">Update</button>
+                  <button type="button" ng-click="Update(user)" class="addButton">Update</button>
                 </form>
               </add-employee>
             </div>
@@ -85,9 +85,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="lang in languages | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
+                    <tr ng-repeat="lang in userrr.languages | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
                       <td>{{lang.lang_name}}</td>
-                      <td><i class="fa fa-trash IconHover" ng-click="DeleteLang(lang.id, $index)"></i></td>
+                      <td><i class="fa fa-trash IconHover" ng-click="DeleteLang(lang.language_id, $index)"></i></td>
                     </tr>
                   </tbody>
                 </table>
@@ -130,9 +130,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="project in projects | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
+                    <tr ng-repeat="project in userrr.projects | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
                       <td>{{project.project_name}}</td>
-                      <td><i class="fa fa-trash IconHover" ng-click="DeleteProj(project.id, $index)"></i></td>
+                      <td><i class="fa fa-trash IconHover" ng-click="DeleteProj(project.project_id, $index)"></i></td>
                     </tr>
                   </tbody>
                 </table>

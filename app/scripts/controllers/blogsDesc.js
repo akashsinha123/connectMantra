@@ -91,7 +91,6 @@ angular.module('chatpayApp')
 
         BlogService.getComment(data)
         .then(function(user){
-          console.log(user.records);
           $scope.comments = user.records;
             
         })

@@ -1,0 +1,147 @@
+<employee-header></employee-header>
+<!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-9">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h1>{{que.question}}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by <a href="#/employee/{{que.id}}" ng-click="emplId(que.id)">{{que.name}}</a>
+                </p>
+				<p id="FloatLeft" ng-repeat="tag in que.tag">{{tag}}</p>
+
+                <!-- Date/Time -->
+                <p id="FloatRight"><span class="glyphicon glyphicon-time"></span> {{que.ques_created}}</p>
+
+                <hr>
+                <br>
+                <button ng-click="toggleEditQue(); getRemainingLang()" class="btn btn-primary">Edit Question</button>
+                  <add-employee visible="showEditQue">
+                    <form class="addForm">
+                      <h1>Create Blog</h1>
+                      
+                      <fieldset>
+                        <label for="bio">Question:</label>
+            			<textarea id="bio" name="user_bio" rows="8" cols="64" ng-model="que2.question"></textarea>
+                        <label for="job">Tags:</label><p>To choose multiple languages press ctrl/command and select</p>
+				           <select id="job" class="addInput" multiple="true" ng-options="sourc as sourc.name for sourc in remainingTags" ng-model="que2.sourc">
+				           </select>
+				           <ul>
+				             <li ng-repeat="sou in que2.sourc">{{sou.name}}</li>
+				           </ul>
+                      </fieldset>
+                      <button type="button" ng-click="editQues(que2); toggleEditQue()" class="addButton">Edit Blog</button>
+                    </form>
+                  </add-employee>
+                
+                <hr>
+
+                <h3>Answers</h3>
+                <div ng-repeat="ans in answers">
+                	<p id="AnswerA">
+                		{{ans.answer}}
+                	</p>
+					<p id="AnswerB">
+						{{ans.answer_desc}} 
+					</p>
+                    <p id="FloatLeft">By: {{ans.user_name}}</p>
+                    <p id="FloatRight"><span class="glyphicon glyphicon-time"></span> {{ans.created}}</p>
+                    <br>
+					<div class="well">
+                        <div class="media" ng-repeat="comment in ans.comments">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#/employee/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
+                                    <small>{{comment.created}}</small>
+                                </h4>
+                                {{comment.comment}}
+                            </div>
+                        </div>
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" ng-model="comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-click="submitComment(comment, ans.id)">Submit</button>
+                    </form>
+                	</div>
+                    <br>
+                	<hr class="HeaderHr">
+                    <br>
+                </div>
+
+                <!-- Blog Comments -->
+
+                <!-- Comments Form -->
+                
+
+                <hr>
+
+                <!-- Posted Comments -->
+
+                <!-- Comment -->
+                <div class="media" ng-repeat="comment in comments">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="#/employee/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
+                            <small>{{comment.sug_created}}</small>
+                        </h4>
+                        {{comment.comment}}
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-3">
+
+                <!-- Blog Search Well -->
+                <div class="well">
+                    <h4>Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+		<h3>Answer</h3>
+        <div id="editor" ng-model="ans.answer">
+		</div>
+		<br>
+		<h4>Description/Note</h4>
+		<textarea id="bio" rows="4" cols="64" ng-model="ans.desc"></textarea>
+		<br>
+		<button ng-click="submitAnswer(ans)" class="btn btn-primary">Submit Answer</button>
+		<hr>
+    </div>
+    <!-- /.container -->

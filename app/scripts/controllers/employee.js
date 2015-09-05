@@ -41,64 +41,74 @@ angular.module('chatpayApp')
     $scope.currentPageee = 1;
     $scope.isEnableee = true;
 
-    $scope.UserEmpId = EmployeeService.userId;
+    $scope.userrr = EmployeeService.user;
+
+    if ($scope.userrr.languages.length > 1) {
+        $scope.length = 1;
+    }else{
+        $scope.length = 0;
+    };
+
+    if ($scope.userrr.projects.length > 1) {
+        $scope.projectlength = 1;
+    }else{
+        $scope.projectlength = 0;
+    };
+
+    $scope.user = $scope.userrr;
 
     //$scope.lang = "";
-    $scope.getUserInfo = function(){
+    // $scope.getUserInfo = function(){
 
 
-        var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
-        }
-        EmployeeService.getUserInfo(data)
-        .then(function(user){
-            $scope.userInfo = user.records[0];
-        })
-        .catch(function(err){
+    //     // var data = {
+    //     //     sessionId : $cookieStore.get('sessionId'),
+    //     //     id: $scope.userrr.id
+    //     // }
+    //     // EmployeeService.getUserInfo(data)
+    //     // .then(function(user){
+    //     //     $scope.userInfo = user.records[0];
+    //     // })
+    //     // .catch(function(err){
             
-        });
-    }
+    //     // });
+    // }
 
-    $scope.getUserLang = function(){
+    // $scope.getUserInfo = function(){
         
-        var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
-        }
-        EmployeeService.getUserLang(data)
-        .then(function(user){
-            $scope.languages = user.records;
-            if ($scope.languages.length > 1) {
-                $scope.length = 1;
-            }else{
-                $scope.length = 0;
-            };
-        })
-        .catch(function(err){
+    //     var data = {
+    //         sessionId : $cookieStore.get('sessionId'),
+    //         id: $scope.userrr.id
+    //     }
+    //     EmployeeService.getUserLang(data)
+    //     .then(function(user){
+    //         $scope.languages = user.records;
             
-        });
-    }
+    //     })
+    //     .catch(function(err){
+            
+    //     });
+    // }
 
-    $scope.getUserProject = function(){
+    // $scope.getUserProject = function(){
         
-        var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
-        }
-        EmployeeService.getUserProject(data)
-        .then(function(user){
-            $scope.projects = user.records;
-            if ($scope.projects.length > 1) {
-                $scope.projectlength = 1;
-            }else{
-                $scope.projectlength = 0;
-            };
-        })
-        .catch(function(err){
+    //     var data = {
+    //         sessionId : $cookieStore.get('sessionId'),
+    //         id: $scope.userrr.id
+    //     }
+    //     EmployeeService.getUserProject(data)
+    //     .then(function(user){
+    //         $scope.projects = user.records;
+    //         if ($scope.userrr.projects.length > 1) {
+    //             $scope.projectlength = 1;
+    //         }else{
+    //             $scope.projectlength = 0;
+    //         };
+    //     })
+    //     .catch(function(err){
             
-        });
-    }
+    //     });
+    // }
 
 
 
@@ -107,7 +117,7 @@ angular.module('chatpayApp')
         
         var data = {
             sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId,
+            id: $scope.userrr.id,
             length: $scope.length
         }
         EmployeeService.getAllLang(data)
@@ -119,20 +129,20 @@ angular.module('chatpayApp')
         });
     }
 
-    $scope.getUserBlog = function(){
+    // $scope.getUserBlog = function(){
         
-        var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
-        }
-        EmployeeService.getUserBlog(data)
-        .then(function(user){
-            $scope.blogs = user.records;
-        })
-        .catch(function(err){
+    //     // var data = {
+    //     //     sessionId : $cookieStore.get('sessionId'),
+    //     //     id: $scope.userrr.id
+    //     // }
+    //     // EmployeeService.getUserBlog(data)
+    //     // .then(function(user){
+    //     //     $scope.blogs = user.records;
+    //     // })
+    //     // .catch(function(err){
             
-        });
-    }
+    //     // });
+    // }
 
 
 
@@ -145,47 +155,38 @@ angular.module('chatpayApp')
     $scope.showDeleteProj = false;
     $scope.showAddBlog = false;
     $scope.showEditBlog = false;             
-    $scope.showDeleteBlog = false;               
-
-    $scope.user = {
-        name : "",
-        number : "",
-        emergencyNumber : "",
-        birthday : "",
-        bloodGroup : "",
-        presentAddress : "",
-        permanentAddress : ""
-    };
+    $scope.showDeleteBlog = false;
 
     $scope.toggleAddEmployee = function(name, number, emergencyNumber, birthday, bloodGroup, presentAddress, permanentAddress){
         $scope.showAddModal = !$scope.showAddModal;
-        $scope.user.name = name;
-        $scope.user.number = number;
-        $scope.user.emergencyNumber = emergencyNumber;
-        $scope.user.birthday = birthday;
-        $scope.user.bloodGroup = bloodGroup;
-        $scope.user.presentAddress = presentAddress;
-        $scope.user.permanentAddress = permanentAddress;
+        // $scope.user.name = name;
+        // $scope.user.number = number;
+        // $scope.user.emergencyNumber = emergencyNumber;
+        // $scope.user.birthday = birthday;
+        // $scope.user.bloodGroup = bloodGroup;
+        // $scope.user.presentAddress = presentAddress;
+        // $scope.user.permanentAddress = permanentAddress;
     };
 
-    $scope.Update = function(){
+    $scope.Update = function(user){
+
 
         $scope.updatedData = {
-            name : $scope.user.name,
-            number : $scope.user.number,
-            emergencyNumber : $scope.user.emergencyNumber,
-            birthday : $scope.user.birthday,
-            bloodGroup : $scope.user.bloodGroup,
-            presentAddress : $scope.user.presentAddress,
-            permanentAddress : $scope.user.permanentAddress,
+            name : user.name,
+            number : user.mobile,
+            emergencyNumber : user.emergency_contact_no,
+            birthday : user.dob,
+            bloodGroup : user.blood_group,
+            presentAddress : user.address,
+            permanentAddress : user.permanent_address,
             sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
+            id: $scope.userrr.id
         };
 
 
         EmployeeService.updateUser($scope.updatedData)
         .then(function(user){
-            if (user == "1 records UPDATED successfully" ) {$scope.showSuccessUpdateMsg = true;};
+            
         })
         .catch(function(err){
             
@@ -213,11 +214,11 @@ angular.module('chatpayApp')
                 id: val.id,
                 lang_name : val.name
             }
-            $scope.languages.push(pal);
+            $scope.userrr.languages.push(pal);
         });
         var data = {
             sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId,
+            id: $scope.userrr.id,
             langId : $scope.selectedValues
         }
         EmployeeService.addEmpLang(data)
@@ -242,11 +243,11 @@ angular.module('chatpayApp')
                 id: val.id,
                 project_name : val.name
             }
-            $scope.projects.push(kal);
+            $scope.userrr.projects.push(kal);
         });
         var data = {
             sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId,
+            id: $scope.userrr.id,
             projId : $scope.selectedProjects
         }
         EmployeeService.addEmpProj(data)
@@ -264,57 +265,57 @@ angular.module('chatpayApp')
 
 
 
-    $scope.addBlog =  function(blog){
+    // $scope.addBlog =  function(blog){
 
-        var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            name : blog.name,
-            description : blog.description
-        }
+    //     var data = {
+    //         sessionId : $cookieStore.get('sessionId'),
+    //         name : blog.name,
+    //         description : blog.description
+    //     }
 
-        EmployeeService.addBlog(data)
-        .then(function(user){
-            $scope.blogAddedMsg = user;
-            if ($scope.blogAddedMsg == "1 records UPDATED successfully" ) {$scope.showSuccessAddBlogMsg = true;};
+    //     EmployeeService.addBlog(data)
+    //     .then(function(user){
+    //         $scope.blogAddedMsg = user;
+    //         if ($scope.blogAddedMsg == "1 records UPDATED successfully" ) {$scope.showSuccessAddBlogMsg = true;};
             
-        })
-        .catch(function(err){
+    //     })
+    //     .catch(function(err){
             
-        });
+    //     });
 
 
 
-        var data2 = {
-            sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId
-        }
+    //     var data2 = {
+    //         sessionId : $cookieStore.get('sessionId'),
+    //         id: $scope.userrr.id
+    //     }
 
-        EmployeeService.addUserBlogRel(data2)
-        .then(function(user){
+    //     EmployeeService.addUserBlogRel(data2)
+    //     .then(function(user){
 
             
             
-        })
-        .catch(function(err){
+    //     })
+    //     .catch(function(err){
             
-        });
+    //     });
       
         
-    };
+    // };
 
 
-    $scope.blog3 = {
-        name : "",
-        description : "",
-        id : ""
-    };
+    // $scope.blog3 = {
+    //     name : "",
+    //     description : "",
+    //     id : ""
+    // };
 
-    $scope.editBlog = function(name, description,index){
-        $scope.selectedBlog = $scope.blogs[index];
-        $scope.blogs[index].name = name;
-        $scope.blogs[index].description = description;
+    // $scope.editBlog = function(name, description,index){
+    //     $scope.selectedBlog = $scope.blogs[index];
+    //     $scope.blogs[index].name = name;
+    //     $scope.blogs[index].description = description;
 
-    };
+    // };
 
     // $scope.editBlogDatabase = function(blog){
 
@@ -347,17 +348,18 @@ angular.module('chatpayApp')
                 $scope.isEnable = false;
                 var data = {
                     sessionId : $cookieStore.get('sessionId'),
-                    id: $scope.UserEmpId,
+                    id: $scope.userrr.id,
                     langId : id
                 }
+
                 EmployeeService.deleteEmpLang(data)
                 .then(function(user){
                     if (user == "1 records UPDATED successfully" ) {
                         $scope.showSuccessDeleteLangMsg = true;
                         bootbox.alert("Language Deleted");
-                        $scope.languages.splice(indd,1);
+                        $scope.userrr.languages.splice(indd,1);
                     }else{
-                        bootbox.alert("Cannot delete Language due to RDBMS");
+                        bootbox.alert("Some error Occured");
                     };
                 })
                 .catch(function(err){
@@ -376,7 +378,7 @@ angular.module('chatpayApp')
                 $scope.isEnableee = false;
                 var data = {
                     sessionId : $cookieStore.get('sessionId'),
-                    id: $scope.UserEmpId,
+                    id: $scope.userrr.id,
                     projId : id
                 }
                 
@@ -386,9 +388,9 @@ angular.module('chatpayApp')
                     if (user == "1 records UPDATED successfully" ) {
                         $scope.showSuccessDeleteProjMsg = true;
                         bootbox.alert("Project Deleted");
-                        $scope.projects.splice(ind,1);
+                        $scope.userrr.projects.splice(ind,1);
                     }else{
-                        bootbox.alert("Cannot delete Project due to RDBMS");
+                        bootbox.alert("Some error Occured");
                     };
                 })
                 .catch(function(err){
@@ -406,7 +408,7 @@ angular.module('chatpayApp')
         
         var data = {
             sessionId : $cookieStore.get('sessionId'),
-            id: $scope.UserEmpId,
+            id: $scope.userrr.id,
             length: $scope.projectlength
         }
         EmployeeService.getAllProjects(data)
@@ -443,28 +445,7 @@ angular.module('chatpayApp')
         $scope.showDeleteProj = !$scope.showDeleteProj;
     }
     
-    $scope.toggleAddBlog = function(){
-        $scope.showAddBlog = !$scope.showAddBlog;
-    }
-
-    $scope.toggleEditBlog = function(event){
-        $(event.target).siblings();
-        console.log($(event.target).siblings());
-        $scope.showEditBlog = !$scope.showEditBlog;
-    }
-
-    $scope.toggleDeleteBlog = function(){
-        $scope.showDeleteBlog = !$scope.showDeleteBlog;
-    }
 
 
-
-
-    
-
-    $scope.getUserLang();
-    $scope.getUserInfo();
-    $scope.getUserProject();
-    $scope.getUserBlog();
 
   });

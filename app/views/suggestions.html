@@ -1,0 +1,142 @@
+<employee-header></employee-header>
+<!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            
+
+            <div class="col-md-9">
+
+              <h1 class="page-header">
+                  Suggestions
+                  <small>and Complaints</small>
+              </h1>
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <div ng-repeat="suggestion in suggestions | filter : blogSearch | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
+                <h1>{{suggestion.sug_name}}</h1>
+
+                <!-- Author -->
+                <p class="lead" id="FloatLeft">
+                    by <a href="#/employee/{{suggestion.id}}" ng-click="emplId(suggestion.id)">{{suggestion.name}}</a>
+                </p>
+              
+                <!-- Date/Time -->
+                <p id="FloatRight"><span class="glyphicon glyphicon-time"></span> {{suggestion.sug_created}}</p>
+
+                <hr>
+                <br>
+                <!-- Post Content -->
+                <p id="AnswerC">{{suggestion.description | limitTo : charactersLimit}}</p>
+                <br>
+                <a class="btn btn-primary" href="#/suggestions/{{suggestion.sug_id}}" ng-click="sugId(suggestion)">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <hr class="HeaderHr">
+
+                <br>
+                </div>
+                
+                <hr>
+                
+                <button ng-click="toggleAddSug()" class="btn btn-primary">Add Suggestion</button>
+                <add-employee visible="showAddSug">
+                  <form class="addForm">
+                    <h1>Create Suggestion</h1>
+                    
+                    <fieldset>
+                      <label for="name" id="FloatLeft">Suggestion Name:</label>
+                      <input id="FloatRight" type="checkbox" ng-model="sug2.anonymous" ng-true-value="'anonymous'" ng-false-value="'False'">
+                      <label id="FloatRight" for="name" id="FloatLeft">Make Anonymous:</label>
+                      <input type="text" id="name" name="user_name" class="addInput" ng-model="sug2.sug_name">
+                      <label for="bio">Suggestion:</label>
+                      <textarea id="bio" name="user_bio" rows="8" cols="64" ng-model="sug2.description"></textarea>
+                    </fieldset>
+                    <button type="button" ng-click="addSug(sug2); toggleAddSug()" class="addButton">Create Suggestion</button>
+                  </form>
+                </add-employee>
+
+                <!-- Pagination -->
+                <div class="containerrr">
+                  <div class="pagination">
+                  <pagination total-items="suggestions.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
+                  </div>
+                </div>
+                
+            </div>
+
+            
+
+            <div class="col-md-3">
+                <!-- Blog Sidebar Widgets Column -->
+
+                  <!-- Blog Search Well -->
+                  <div class="well">
+                      <h4>Search</h4>
+                      <div class="input-group">
+                          <input type="text" class="form-control" ng-model="blogSearch">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default" type="button" ng-click="search()">
+                                  <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                          </span>
+                      </div>
+                      <!-- /.input-group -->
+                  </div>
+
+                  <!-- Side Widget Well -->
+                  <div class="well">
+                      <h4>Side Widget Well</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                  </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <employee-footer></employee-footer>
+
+    </div>
+    <!-- /.container -->

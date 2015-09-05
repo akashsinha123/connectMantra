@@ -5,58 +5,56 @@
         <div class="row">
 
             <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
+            <div class="col-lg-9">
 
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>{{blog.blog_name}}</h1>
+                <h1>{{sug.sug_name}}</h1>
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#/employee/{{blog.id}}" ng-click="emplId(blog.id)">{{blog.name}}</a>
+                    by <a href="#/employee/{{sug.id}}" ng-click="emplId(sug.id)">{{sug.name}}</a>
                 </p>
 
                 <hr>
 
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> {{blog.blog_created}}</p>
-
-                <hr>
-
-                <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <p><span class="glyphicon glyphicon-time"></span> {{sug.sug_created}}</p>
 
                 <hr>
 
                 <!-- Post Content -->
-                <p>{{blog.description}}</p>
+                <p>{{sug.description}}</p>
                 <br>
-                <button ng-click="toggleEditBlog()" class="btn btn-primary">Edit Blog</button>
-                  <add-employee visible="showEditBlog">
+                <button ng-click="toggleEditSug()" class="btn btn-primary">Edit Suggestion</button>
+                  <add-employee visible="showEditSug">
                     <form class="addForm">
-                      <h1>Create Blog</h1>
+                      <h1>Edit Suggestion</h1>
                       
                       <fieldset>
-                        <label for="name">Blog Name:</label>
-                        <input type="text" id="name" name="user_name" class="addInput" ng-model="blog2.blog_name">
-                        <label for="bio">Blog:</label>
-                        <textarea id="bio" name="user_bio" rows="8" cols="64" ng-model="blog2.description"></textarea>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="user_name" class="addInput" ng-model="sug2.sug_name">
+                        <label for="bio">Suggestion:</label>
+                        <textarea id="bio" name="user_bio" rows="8" cols="64" ng-model="sug2.description"></textarea>
                       </fieldset>
-                      <button type="button" ng-click="editBlog(blog2); toggleEditBlog()" class="addButton">Edit Blog</button>
+                      <button type="button" ng-click="editSug(sug2); toggleEditSug()" class="addButton">Edit Suggestion</button>
                     </form>
                   </add-employee>
-                
                 <hr>
-
+                <!-- Blog Like -->
+                <!-- <p id="FloatLeft" ><span class="glyphicon glyphicon-thumbs-up"></span></p> -->
+               <!-- <hr> -->
+                <!-- <br> -->
                 <!-- Blog Comments -->
-
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
+                    <input id="FloatRight" type="checkbox" ng-model="comment.anonymous" ng-true-value="'anonymous'" ng-false-value="'False'">
+                    <label id="FloatRight" for="name" id="FloatLeft">Make Anonymous:</label>
                     <form role="form">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" ng-model="comment"></textarea>
+                            <textarea class="form-control" rows="3" ng-model="comment.comment"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" ng-click="submitComment(comment)">Submit</button>
                     </form>
@@ -72,8 +70,8 @@
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#/employee/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
-                            <small>{{comment.created}}</small>
+                        <h4 class="media-heading"><a href="#/employee/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
+                            <small>{{comment.sug_created}}</small>
                         </h4>
                         {{comment.comment}}
                     </div>
@@ -84,11 +82,11 @@
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <!-- Blog Search Well -->
                 <div class="well">
-                    <h4>Blog Search</h4>
+                    <h4>Search</h4>
                     <div class="input-group">
                         <input type="text" class="form-control">
                         <span class="input-group-btn">

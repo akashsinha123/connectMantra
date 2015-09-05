@@ -150,17 +150,26 @@ angular.module('chatpayApp')
             sessionId : $cookieStore.get('sessionId')
         }
 
-        EmployeeService.count(data)
-        .then(function(user){
-            $scope.count = user.records[0].count;
-            $scope.pages = Math.ceil($scope.count / 5);
-        })
-        .catch(function(err){
-            
-        });
         EmployeeService.getUsers(data)
         .then(function(user){
-            $scope.users = user.records;
+            $scope.users = user[0].records;
+            $scope.languages = user[1].records;
+            $scope.projects = user[2].records;
+            
+            angular.forEach($scope.users, function(val){
+                val.languages = [];
+                val.projects = [];
+                angular.forEach($scope.languages, function(pal){
+                    if (val.id == pal.user_id) {
+                        val.languages.push(pal);
+                     };
+                });
+                angular.forEach($scope.projects, function(kal){
+                    if (val.id == kal.user_id) {
+                        val.projects.push(kal);
+                     };
+                });
+            });
         })
         .catch(function(err){
             
@@ -174,8 +183,8 @@ angular.module('chatpayApp')
 
 
     $scope.userId = function(id){
-        EmployeeService.userId = id;
-        var idd = id
+        EmployeeService.user = id;
+        var idd = id.id;
         $location.path('/employee/idd');
     }
 
