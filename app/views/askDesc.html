@@ -14,7 +14,7 @@
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#/employee/{{que.id}}" ng-click="emplId(que.id)">{{que.name}}</a>
+                    by <a href="#/employees/{{que.id}}" ng-click="emplId(que.id)">{{que.name}}</a>
                 </p>
 				<p id="FloatLeft" ng-repeat="tag in que.tag">{{tag}}</p>
 
@@ -23,7 +23,7 @@
 
                 <hr>
                 <br>
-                <button ng-click="toggleEditQue(); getRemainingLang()" class="btn btn-primary">Edit Question</button>
+                <button ng-click="toggleEditQue(); getRemainingLang()" class="btn btn-primary" ng-show="personalProfile">Edit Question</button>
                   <add-employee visible="showEditQue">
                     <form class="addForm">
                       <h1>Create Blog</h1>
@@ -61,7 +61,7 @@
                                 <img class="media-object" src="http://placehold.it/64x64" alt="">
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#/employee/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
+                                <h4 class="media-heading"><a href="#/employees/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
                                     <small>{{comment.created}}</small>
                                 </h4>
                                 {{comment.comment}}
@@ -95,7 +95,7 @@
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#/employee/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
+                        <h4 class="media-heading"><a href="#/employees/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
                             <small>{{comment.sug_created}}</small>
                         </h4>
                         {{comment.comment}}

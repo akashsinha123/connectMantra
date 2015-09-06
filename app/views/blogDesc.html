@@ -14,7 +14,7 @@
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#/employee/{{blog.id}}" ng-click="emplId(blog.id)">{{blog.name}}</a>
+                    by <a href="#/employees/{{blog.id}}" ng-click="emplId(blog.id)">{{blog.name}}</a>
                 </p>
 
                 <hr>
@@ -32,7 +32,7 @@
                 <!-- Post Content -->
                 <p>{{blog.description}}</p>
                 <br>
-                <button ng-click="toggleEditBlog()" class="btn btn-primary">Edit Blog</button>
+                <button ng-click="toggleEditBlog()" class="btn btn-primary" ng-show="personalProfile">Edit Blog</button>
                   <add-employee visible="showEditBlog">
                     <form class="addForm">
                       <h1>Create Blog</h1>
@@ -72,7 +72,7 @@
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#/employee/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
+                        <h4 class="media-heading"><a href="#/employees/{{comment.id}}" ng-click="emplId(comment.id)">{{comment.user_name}}</a>
                             <small>{{comment.created}}</small>
                         </h4>
                         {{comment.comment}}

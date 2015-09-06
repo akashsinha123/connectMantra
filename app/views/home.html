@@ -122,13 +122,10 @@
           </div><!--/row-->
 
 
-
-
-
         </div>
         <!-- /.row -->
         <br>
-        <button ng-click="toggleAddEmpl()" class="btn btn-primary">Add</button>
+        <button ng-click="toggleAddEmpl()" class="btn btn-primary" ng-show="isAdmin">Add</button>
               <add-employee visible="showAddEmp">
                 <form class="addForm">
                   <fieldset>

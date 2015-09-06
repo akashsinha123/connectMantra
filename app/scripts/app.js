@@ -20,7 +20,9 @@ angular
     'angular-md5',
     'luegg.directives',
     'http-auth-interceptor',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'flow',
+    'imageupload'
   ])
   .constant('moment', moment)
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
@@ -62,6 +64,11 @@ angular
       .when('/employee/:id', {
         templateUrl: 'views/employee.html',
         controller: 'EmployeeCtrl',
+        //resolve: resolve
+      })
+      .when('/employees/:id', {
+        templateUrl: 'views/employeess.html',
+        controller: 'EmployeessCtrl',
         //resolve: resolve
       })
       .when('/language', {

@@ -37,6 +37,24 @@ angular.module('chatpayApp')
         $scope.showAddBlog = !$scope.showAddBlog;
     }
 
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
+
 
     $scope.date = new Date();
     $scope.date = $scope.date.toDateString();

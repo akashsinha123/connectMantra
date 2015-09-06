@@ -14,7 +14,7 @@
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#/employee/{{sug.id}}" ng-click="emplId(sug.id)">{{sug.name}}</a>
+                    by <a href="#/employees/{{sug.id}}" ng-click="emplId(sug.id)">{{sug.name}}</a>
                 </p>
 
                 <hr>
@@ -27,7 +27,7 @@
                 <!-- Post Content -->
                 <p>{{sug.description}}</p>
                 <br>
-                <button ng-click="toggleEditSug()" class="btn btn-primary">Edit Suggestion</button>
+                <button ng-click="toggleEditSug()" class="btn btn-primary" ng-show="personalProfile">Edit Suggestion</button>
                   <add-employee visible="showEditSug">
                     <form class="addForm">
                       <h1>Edit Suggestion</h1>
@@ -70,7 +70,7 @@
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#/employee/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
+                        <h4 class="media-heading"><a href="#/employees/{{comment.user_id}}" ng-click="emplId(comment.user_id)">{{comment.user_name}}</a>
                             <small>{{comment.sug_created}}</small>
                         </h4>
                         {{comment.comment}}

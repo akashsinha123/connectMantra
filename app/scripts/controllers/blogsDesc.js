@@ -19,7 +19,29 @@ angular.module('chatpayApp')
         $scope.showEditBlog = !$scope.showEditBlog;
     }
 
+    if ($scope.blog.id == $cookieStore.get('userId')) {
+        $scope.personalProfile = true;
+    };
+    
     $scope.blog2 = $scope.blog;
+
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
 
     $scope.editBlog =  function(blog){
 

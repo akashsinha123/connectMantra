@@ -10,7 +10,7 @@
 angular.module('chatpayApp')
   .service('EmployeeService', function ($http, $q) {
 
-
+    this.isAdmin = "";
     this.userId = "";
    
    this.getUsers = function(data){
@@ -92,8 +92,34 @@ angular.module('chatpayApp')
 
 
 
+this.isloggedIn = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/isloggedIn.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
 
 
+  this.getRole = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/getRole.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
 
 
 
@@ -161,7 +187,21 @@ angular.module('chatpayApp')
    this.getUserLang = function(data){
     var deferred = $q.defer();
     
-    $http.post('/api/employeeLang.php', $.param(data))
+    $http.post('/api/employeeLangs.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+   };
+
+    this.getUserProjects = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/employeeProjects.php', $.param(data))
     .success(function(info){
       deferred.resolve(info);
     })
@@ -175,7 +215,7 @@ angular.module('chatpayApp')
    this.getUserProject = function(data){
     var deferred = $q.defer();
     
-    $http.post('/api/employeeProject.php', $.param(data))
+    $http.post('/api/employeeProjects.php', $.param(data))
     .success(function(info){
       deferred.resolve(info);
     })

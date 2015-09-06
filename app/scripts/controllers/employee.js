@@ -41,7 +41,14 @@ angular.module('chatpayApp')
     $scope.currentPageee = 1;
     $scope.isEnableee = true;
 
+    $scope.profilePic = "";
+
     $scope.userrr = EmployeeService.user;
+    console.log($scope.userrr);
+
+    if ($scope.userrr.id == $cookieStore.get('userId')) {
+        $scope.personalProfile = true;
+    };
 
     if ($scope.userrr.languages.length > 1) {
         $scope.length = 1;
@@ -56,6 +63,35 @@ angular.module('chatpayApp')
     };
 
     $scope.user = $scope.userrr;
+
+    $scope.single = function(image){
+        console.log(image);
+    }
+     $scope.showImage = function(image){
+        console.log(image);
+    }
+
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
+
+    // $scope.SubmitProfilePic = function(){
+    //     console.log($scope.profilePic);
+    // }
 
     //$scope.lang = "";
     // $scope.getUserInfo = function(){

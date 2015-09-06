@@ -51,6 +51,49 @@ angular.module('chatpayApp')
         $scope.showDeleteEmpl = !$scope.showDeleteEmpl;
     }
 
+    $scope.role = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+            id : $cookieStore.get('userId')
+        }
+        console.log(data);
+        EmployeeService.getRole(data)
+        .then(function(user){
+
+            if (user.records[0].role == "Admin") {
+                $scope.isAdmin = true;
+                EmployeeService.isAdmin = $scope.isAdmin;
+            }else{
+                $scope.isAdmin = false;
+                EmployeeService.isAdmin = $scope.isAdmin;
+            };
+        })
+        .catch(function(err){
+            
+        });
+
+    }
+
+    $scope.role();
+
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
+
     
     $scope.user = {
         employeeId : "",
@@ -144,6 +187,7 @@ angular.module('chatpayApp')
 
     
 
+
     $scope.getUsers = function(){
         
         var data = {
@@ -180,6 +224,7 @@ angular.module('chatpayApp')
         $scope.active = u.mobile;
     };
 
+    
 
 
     $scope.userId = function(id){

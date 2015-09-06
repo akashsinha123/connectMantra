@@ -16,6 +16,10 @@ angular.module('chatpayApp')
         $scope.showEditQue = !$scope.showEditQue;
     }
 
+    if ($scope.que.id == $cookieStore.get('userId')) {
+        $scope.personalProfile = true;
+    };
+
     $scope.answers = [];
 
     $scope.editor = ace.edit("editor");
@@ -31,6 +35,24 @@ angular.module('chatpayApp')
     $scope.emplId = function(id){
       EmployeeService.userId = id;
     }
+
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
 
     $scope.date = new Date();
     $scope.date = $scope.date.toDateString();

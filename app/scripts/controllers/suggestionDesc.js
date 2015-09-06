@@ -20,6 +20,29 @@ angular.module('chatpayApp')
       EmployeeService.userId = id;
     }
 
+    if ($scope.sug.id == $cookieStore.get('userId')) {
+        $scope.personalProfile = true;
+    };
+
+
+    $scope.isloggedIn = function(){
+        var data = {
+            sessionId : $cookieStore.get('sessionId'),
+        }
+        EmployeeService.isloggedIn(data)
+        .then(function(user){
+          console.log(user);
+          if (user != "true") {
+            $location.path('/login');
+          };
+        })
+        .catch(function(err){
+            
+        });
+    }
+
+    $scope.isloggedIn();
+
     $scope.showEditSug = false;
 
     $scope.toggleEditSug = function(){

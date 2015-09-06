@@ -44,7 +44,7 @@
                     <h3 id="LeftMargin"><a href="#/ask/{{que.que_id}}" ng-click="queId(que)">{{que.question}}</a></h3>
                     <p id="FloatLeft" ng-repeat="tag in que.tag">{{tag}}</p>
                     <p id="FloatRight"><span class="glyphicon glyphicon-time"></span>{{que.ques_created}}</p>
-                    <p id="FloatRight"><a href="#/employee/{{que.id}}" ng-click="emplId(que.id)">By: {{que.name}}</a></p>
+                    <p id="FloatRight"><a href="#/employees/{{que.id}}" ng-click="emplId(que.id)">By: {{que.name}}</a></p>
                     <hr>
                     <button class="btn btn-default bottomMarggg" type="button">
                       Answers <span class="badge" ng-model="AnsCount">{{que.count}}</span>

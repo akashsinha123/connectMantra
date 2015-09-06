@@ -28,7 +28,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="emp in employeeInfo | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
-                      <td><p ng-click="userId(emp.id)"><a href="#/employee/{{emp.id}}">{{emp.name}}</a></p></td>
+                      <td><p ng-click="userId(emp.id)"><a href="#/employees/{{emp.id}}">{{emp.name}}</a></p></td>
                     </tr>
                   </tbody>
                 </table>
