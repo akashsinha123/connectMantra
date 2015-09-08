@@ -55,11 +55,20 @@ angular.module('chatpayApp')
         EmployeeService.getUserInfo(data)
         .then(function(user){
             $scope.userInfo = user.records[0];
+            if ($scope.userInfo.extension) {
+                $scope.path = '/api/images/' + $scope.userInfo.id + '.' + $scope.userInfo.extension;
+                
+            }else{
+                $scope.path = '../../images/-1.png'
+            };
+
         })
         .catch(function(err){
             
         });
     }
+
+   
 
     $scope.isloggedIn = function(){
         var data = {

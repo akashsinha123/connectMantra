@@ -82,7 +82,7 @@
             </thead>
             <tbody>
               <tr bgcolor="#eee" ng-repeat-start="user in users | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize | filter : employeeDir.name | filter : employeeDir.gender : true | filter : employeeDir.bloodGroup | filter : employeeDir.languagesKnown | filter : employeeDir.projectsInvolved" ng-click="showDetail(user)" ng-class-odd="'alt'">
-                <td class="col-xs-1"><img src="../images/project_pic01.jpg" class="img-thumbnail img-responsive img-circle"></td> 
+                <td class="col-xs-1"><img src="{{user.path}}" class="img-thumbnail img-responsive img-circle"></td> 
                 <td class="col-xs-2 cap">{{user.name}}</td> 
                 <td class="col-xs-2 cap">{{user.mobile}}</td>
                 <td class="col-xs-2 strong">{{user.emergency_contact_no}}</td>
@@ -94,7 +94,7 @@
                   <div class="row">
                     <div class="col-xs-12"><h2 class="cap">{{user.name}} <i ng-show="user.gender=='Female'" class="fa fa-female"></i><i ng-show="user.gender=='Male'" class="fa fa-male"></i></h2></div>
                     <div class="col-md-4 col-xs-12 text-center">
-                      <img src="../images/abcd.jpg" class="img-thumbnailll img-responsive img-circle center-block">
+                      <img src="{{user.path}}" class="img-thumbnailll img-responsive img-circle center-block">
                     </div>
                     <div class="col-md-3 col-xs-6 small">
                       <label>Address</label> {{user.address}}<br>

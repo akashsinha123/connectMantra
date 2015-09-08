@@ -115,8 +115,17 @@ angular.module('chatpayApp')
 
         SuggestionService.getComment(data)
         .then(function(user){
-          console.log(user.records);
+            console.log(user);
           $scope.comments = user.records;
+          angular.forEach($scope.comments, function(val){
+                val.path = "";
+                if (val.extension) {
+                    val.path = '/api/images/' + val.id + '.' + val.extension;
+                }else{
+                    val.path = 'http://placehold.it/64x64';
+                };
+
+            });
             
         })
         .catch(function(err){

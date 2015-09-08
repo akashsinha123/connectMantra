@@ -26,6 +26,20 @@ angular.module('chatpayApp')
 
     return deferred.promise;
    };
+
+   this.uploadBlogImage = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/uploadBlogImage.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+   };
    
 
    this.submitComment = function(data){

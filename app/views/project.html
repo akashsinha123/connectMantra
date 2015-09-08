@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="project in projects | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
+          <tr ng-repeat="project in projects | filter : blogSearch | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
             <td>{{project.name}}</td>
             <td>{{project.desc | limitTo : charactersLimit}}</td>
             <td><i class="fa fa-external-link IconHover" ng-click="projectId(project.id, project.name)"></i></td>

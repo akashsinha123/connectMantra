@@ -105,6 +105,12 @@ angular.module('chatpayApp')
         EmployeeService.getBlogs(data)
         .then(function(user){
             $scope.blogs = user.records;
+            angular.forEach($scope.blogs, function(val){
+                val.path = "";
+                if (val.extension) {
+                    val.path = '/api/blogsImages/' + val.blog_id + '.' + val.extension;
+                }
+            });
         })
         .catch(function(err){
             

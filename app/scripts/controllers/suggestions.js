@@ -24,7 +24,7 @@ angular.module('chatpayApp')
   $scope.currentPage = 1;
   $scope.isEnable = true;
 
-  $scope.charactersLimit = 160;
+  $scope.charactersLimit = 220;
 
   $scope.search = function() {
       $scope.isEnable = false;

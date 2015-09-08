@@ -86,6 +86,35 @@ angular.module('chatpayApp')
           $scope.answers = user.records;
         angular.forEach($scope.answers, function(val){
             $scope.answerId.push(val.id);
+
+        });
+
+        var data2 = {
+            sessionId : $cookieStore.get('sessionId'),
+            answ_id: $scope.answerId
+        }
+        AskService.getAnsComment(data2)
+        .then(function(user){
+            console.log(user);
+            angular.forEach($scope.answers, function(val){
+                val.comments = [];
+                angular.forEach(user.records, function(pal){
+                    pal.path = "";
+                    if (pal.extension) {
+                        pal.path = '/api/images/' + pal.user_id + '.' + pal.extension;
+                    }else{
+                        pal.path = 'http://placehold.it/64x64';
+                    };
+                    if (val.id == pal.answer_id) {
+                        val.comments.push(pal);
+                    };
+
+                });
+            });
+            console.log($scope.answers);
+        })
+        .catch(function(err){
+            
         });
         })
         .catch(function(err){
@@ -185,28 +214,10 @@ angular.module('chatpayApp')
     };
 
 
-    setTimeout(function(){
+   
         
-      var data = {
-            sessionId : $cookieStore.get('sessionId'),
-            answ_id: $scope.answerId
-        }
-        AskService.getAnsComment(data)
-        .then(function(user){
-            angular.forEach($scope.answers, function(val){
-                val.comments = [];
-                angular.forEach(user.records, function(pal){
-                    if (val.id == pal.answer_id) {
-                        val.comments.push(pal);
-                    };
-                });
-            });
-            console.log($scope.answers);
-        })
-        .catch(function(err){
-            
-        });
-    }, 130);
+      
+   
      
 
     

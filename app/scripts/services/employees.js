@@ -74,25 +74,59 @@ angular.module('chatpayApp')
 
     return bothPromise;
 
-
-
-
-
-
    };
 
 
+  this.sendMail = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/sendMail.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+
+
+  this.changepassword = "";
+
+
+  this.changePassword = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/changePassword.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+
+
+  this.oldPassword = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/oldPassword.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
 
 
 
-
-
-
-
-
-
-
-this.isloggedIn = function(data){
+  this.isloggedIn = function(data){
     var deferred = $q.defer();
     
     $http.post('/api/isloggedIn.php', $.param(data))
@@ -105,6 +139,22 @@ this.isloggedIn = function(data){
 
     return deferred.promise;
   };
+
+
+  this.uploadImage = function(data){
+    var deferred = $q.defer();
+    
+    $http.post('/api/uploadImage.php', $.param(data))
+    .success(function(info){
+      deferred.resolve(info);
+    })
+    .error(function(err){
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+  
 
 
   this.getRole = function(data){

@@ -11,9 +11,39 @@ angular.module('chatpayApp')
   .controller('BlogDescCtrl', function ($scope, $location, $cookieStore, BlogService, EmployeeService) {
 
     $scope.blog = BlogService.blog;
-
+    console.log($scope.blog);
 
     $scope.showEditBlog = false;
+
+    if ($scope.blog.extension) {
+        $scope.path = '/api/blogsImages/' + $scope.blog.blog_id + '.' + $scope.blog.extension;
+        console.log($scope.path);
+    }else{
+        $scope.path = '../../images/-1.png';
+    };
+
+    $scope.showImage = function(image){
+        if (image) {
+            var data = {
+                sessionId : $cookieStore.get('sessionId'),
+                dataURL: image.dataURL,
+                extention : image.file.name,
+                blogId : $scope.blog.blog_id
+            }
+            console.log(data);
+            BlogService.uploadBlogImage(data)
+            .then(function(user){
+                console.log(user);
+                $scope.path = '/api/' + user;
+
+            })
+            .catch(function(err){
+                
+            });
+        };
+    }
+
+
 
     $scope.toggleEditBlog = function(){
         $scope.showEditBlog = !$scope.showEditBlog;
@@ -114,6 +144,16 @@ angular.module('chatpayApp')
         BlogService.getComment(data)
         .then(function(user){
           $scope.comments = user.records;
+          console.log($scope.comments);
+          angular.forEach($scope.comments, function(val){
+                val.path = "";
+                if (val.extension) {
+                    val.path = '/api/images/' + val.id + '.' + val.extension;
+                }else{
+                    val.path = 'http://placehold.it/64x64';
+                };
+
+            });
             
         })
         .catch(function(err){

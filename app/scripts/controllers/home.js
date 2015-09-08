@@ -56,7 +56,6 @@ angular.module('chatpayApp')
             sessionId : $cookieStore.get('sessionId'),
             id : $cookieStore.get('userId')
         }
-        console.log(data);
         EmployeeService.getRole(data)
         .then(function(user){
 
@@ -82,7 +81,7 @@ angular.module('chatpayApp')
         }
         EmployeeService.isloggedIn(data)
         .then(function(user){
-          console.log(user);
+          
           if (user != "true") {
             $location.path('/login');
           };
@@ -185,7 +184,7 @@ angular.module('chatpayApp')
         })
     }
 
-    
+
 
 
     $scope.getUsers = function(){
@@ -201,6 +200,13 @@ angular.module('chatpayApp')
             $scope.projects = user[2].records;
             
             angular.forEach($scope.users, function(val){
+                val.path = "";
+                if (val.extension) {
+                    val.path = '/api/images/' + val.id + '.' + val.extension;
+                }else{
+                    val.path = '../../images/-1.png';
+                };
+
                 val.languages = [];
                 val.projects = [];
                 angular.forEach($scope.languages, function(pal){

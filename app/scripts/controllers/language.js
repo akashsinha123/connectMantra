@@ -40,6 +40,11 @@ angular.module('chatpayApp')
         });
     }
 
+    $scope.search = function() {
+        $scope.isEnableee = false;
+        $scope.pageSizeee = $scope.languages.length;
+    };
+
 
     $scope.showAddlang = false;
 

@@ -21,7 +21,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span>{{blog.blog_created}}</p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive imgDimension" src="{{blog.path}}" alt="">
                 <hr>
                 <p>{{blog.description | limitTo : charactersLimit}}</p>
                 <a class="btn btn-primary" href="#/blogs/{{blog.blog_id}}" ng-click="blogId(blog)">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>

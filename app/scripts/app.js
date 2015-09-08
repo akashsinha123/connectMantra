@@ -131,6 +131,21 @@ angular
         controller: 'LogoutCtrl',
         //resolve: resolve
       })
+      .when('/changepassword', {
+        templateUrl: 'views/changepassword.html',
+        controller: 'ChangePasswordCtrl',
+        //resolve: resolve
+      })
+      .when('/confirmpassword', {
+        templateUrl: 'views/confirmpassword.html',
+        controller: 'ConfirmPasswordCtrl',
+        //resolve: resolve
+      })
+      .when('/forgotpassword', {
+        templateUrl: 'views/forgotpassword.html',
+        controller: 'ForgotPasswordCtrl',
+        //resolve: resolve
+      })
       .otherwise({
         redirectTo: '/login'
       });

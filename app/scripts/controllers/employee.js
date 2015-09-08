@@ -46,6 +46,13 @@ angular.module('chatpayApp')
     $scope.userrr = EmployeeService.user;
     console.log($scope.userrr);
 
+    if ($scope.userrr.extension) {
+        $scope.path = '/api/images/' + $scope.userrr.id + '.' + $scope.userrr.extension;
+        
+    }else{
+        $scope.path = '../../images/-1.png';
+    };
+
     if ($scope.userrr.id == $cookieStore.get('userId')) {
         $scope.personalProfile = true;
     };
@@ -64,11 +71,23 @@ angular.module('chatpayApp')
 
     $scope.user = $scope.userrr;
 
-    $scope.single = function(image){
-        console.log(image);
-    }
      $scope.showImage = function(image){
-        console.log(image);
+        if (image) {
+            var data = {
+                sessionId : $cookieStore.get('sessionId'),
+                dataURL: image.dataURL,
+                extention : image.file.name,
+                userId : $scope.userrr.id
+            }
+            EmployeeService.uploadImage(data)
+            .then(function(user){
+              $scope.path = '/api/' + user;
+
+            })
+            .catch(function(err){
+                
+            });
+        };
     }
 
     $scope.isloggedIn = function(){

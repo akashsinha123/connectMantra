@@ -40,6 +40,11 @@ angular.module('chatpayApp')
         });
     }
 
+    $scope.search = function() {
+        $scope.isEnableee = false;
+        $scope.pageSizeee = $scope.projects.length;
+    };
+
     $scope.isloggedIn = function(){
         var data = {
             sessionId : $cookieStore.get('sessionId'),
