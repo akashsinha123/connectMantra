@@ -7,6 +7,7 @@
  * # HomeCtrl
  * Controller of the chatpayApp
  */
+ // getter of angularjs app here called chatpayApp
 angular.module('chatpayApp')
   .filter('startFrommm', function(){
     return function(data, start, isEnable){

@@ -76,7 +76,7 @@
                 <th class="col-xs-1"></th> 
                 <th class="col-xs-2">Name</th> 
                 <th class="col-xs-2">Mobile No</th>
-                <th class="col-xs-2">Emergency No</th>
+                <th class="col-xs-2">Designation</th>
                 <th class="col-xs-1"></th>
               </tr>
             </thead>
@@ -85,7 +85,7 @@
                 <td class="col-xs-1"><img src="{{user.path}}" class="img-thumbnail img-responsive img-circle"></td> 
                 <td class="col-xs-2 cap">{{user.name}}</td> 
                 <td class="col-xs-2 cap">{{user.mobile}}</td>
-                <td class="col-xs-2 strong">{{user.emergency_contact_no}}</td>
+                <td class="col-xs-2 strong">{{user.designation}}</td>
                 <td class="col-xs-1"><a href=""><i class="fa fa-plus fa-3x"></i></a></td>
               </tr>
               <tr bgcolor="#eee" ng-repeat-end="" ng-show="active==user.mobile" ng-class-odd="'alt'">
@@ -104,7 +104,7 @@
                     <div class="col-md-3 col-xs-6 small">
                       <label>Birthday</label> {{user.dob}}<br>
                       <label>Phone</label> {{user.mobile}}<br>
-                      <label>Cell</label> {{user.emergency_contact_no}}<br>
+                      <label>Emergency No</label> {{user.emergency_contact_no}}<br>
                       <label>Email</label> {{user.email}}<br>
                     </div>
                     <div>

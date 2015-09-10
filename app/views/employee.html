@@ -8,15 +8,16 @@
             <div class="box">
               <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img ng-src="{{path}}" type="{{image.file.type}}" alt="" class="img-rounded img-responsive" ng-hide="image" />
-                        <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" class="img-rounded img-responsive"/>
+                        <img ng-src="{{path}}" type="{{image.file.type}}" alt="" class="img-rounded img-responsive" id="ImgSize" ng-hide="image" />
+                        <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" class="img-rounded img-responsive" id="ImgSize"/>
                         <input type="file" accept="image/*" image="image" ng-show="personalProfile"/>
                         <br>
                         <button ng-click="showImage(image)" class="btn btn-default" ng-show="personalProfile">Change Profile Picture</button>
                     </div>
                     
                     <div class="col-sm-6 col-md-8">
-                        <h2>{{userrr.name}}</h2>
+                        <h2>Hi. My name is {{userrr.name}} <br>and I'm a {{userrr.designation}}</h2>
+                        <h2>My contact details</h2>
                         <h4>Number: {{userrr.mobile}}</h4>
                         <h4>Emergency Number: {{userrr.emergency_contact_no}}</h4>
                         <h4>Email: {{userrr.email}}</h4>
@@ -26,23 +27,21 @@
                     </div>
                 </div>
             </div>
-            <div class="box">
-              <h3>Address</h3>
-              <div>
-                <span><b>Present Address</b></span><br />
-                <p id="LimitPara">
-                  {{userrr.address}}
-                  {{userrr.city}}
-                  {{userrr.zipCode}}</p>
-                
-                
+            <div class="box AddressParentss">
+              <div class="AddressParent">
+                <h2>Address</h2>
+                <div class="addressDiv">
+                  <span class="AddressSpan"><b>Permanent Address</b></span><br />
+                  <p class="LimitPara">{{userrr.permanent_address}}</p>
+                </div>
+                <div class="addressDiv">
+                  <span class="AddressSpan"><b>Present Address</b></span><br />
+                  <p class="LimitPara">
+                    {{userrr.address}}
+                    {{userrr.city}}
+                    {{userrr.zipCode}}</p>
+                </div>
               </div>
-              <div>
-                <span><b>Permanent Address</b></span><br />
-                <p id="LimitPara">{{userrr.permanent_address}}</p>
-              </div>
-              <br>
-            
               <button ng-click="toggleAddEmployee(userrr.name, userrr.mobile, userrr.emergency_contact_no, userrr.dob, userrr.blood_group, userrr.address, userrr.permanent_address)" class="btn btn-primary" ng-show="personalProfile" >Edit</button>
               <add-employee visible="showAddModal">
                 <form class="addForm">
@@ -57,6 +56,9 @@
                     
                     <label>Emergency Number:</label>
                     <input type="text" class="addInput" ng-model="user.emergency_contact_no">
+
+                    <label>Designation:</label>
+                    <input type="text" class="addInput" ng-model="user.designation">
                     
                     <label>Birthday:</label>
                     <input type="text" class="addInput" ng-model="user.dob">
@@ -75,8 +77,11 @@
                 </form>
               </add-employee>
             </div>
-            <br><br>
+            <hr class="HeaderHr">
+            <br>
             <div class="box">
+              <div class="textCenter"><h1>My Servicess</h1></div>
+              
               <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Programming Languages Specialized In</div>
@@ -86,13 +91,13 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Delete</th>
+                      <th ng-show="personalProfile">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="lang in userrr.languages | startFrom:(currentPage - 1)* pageSize:isEnable | limitTo: pageSize">
                       <td>{{lang.lang_name}}</td>
-                      <td><i class="fa fa-trash IconHover" ng-click="DeleteLang(lang.language_id, $index)"></i></td>
+                      <td ng-show="personalProfile"><i class="fa fa-trash IconHover" ng-click="DeleteLang(lang.language_id, $index)"></i></td>
                     </tr>
                   </tbody>
                 </table>
@@ -120,7 +125,7 @@
                 <pagination total-items="languages.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
               </div>
             </div>
-            <br><br>
+            <hr class="HeaderHr">
             <div class="box">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
@@ -131,13 +136,13 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Delete</th>
+                      <th ng-show="personalProfile">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="project in userrr.projects | startFrommm:(currentPageee - 1)* pageSizeee:isEnableee | limitTo: pageSizeee">
                       <td>{{project.project_name}}</td>
-                      <td><i class="fa fa-trash IconHover" ng-click="DeleteProj(project.project_id, $index)"></i></td>
+                      <td ng-show="personalProfile"><i class="fa fa-trash IconHover" ng-click="DeleteProj(project.project_id, $index)"></i></td>
                     </tr>
                   </tbody>
                 </table>

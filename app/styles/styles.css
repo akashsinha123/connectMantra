@@ -287,18 +287,16 @@ header .header-content {
 
 
 .headerPara{
-    margin-right: auto;
-    margin-left: auto;
     max-width: 80%;
     width: 800px;
     height: 54px;
     font-size: 18px;
     line-height: 1.5;
-    margin: 0 0 10px;
-    margin-bottom: 50px;
+    margin: 0 auto;
     font-weight: 300;
     color: rgba(255,255,255,.7);
-    margin-left: 544px;
+    margin-bottom: 40px;
+    
 }
 
 .HeaderHr{
@@ -317,15 +315,13 @@ header .header-content {
 }
 
 header .header-content .header-content-inner h1 {
-    margin-top: 0;
-    margin-bottom: 0;
     text-transform: uppercase;
     font-weight: 700;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-size: 65px;
-    width: 1000px;
+    width: 60%;
     height: 142px;
-    margin-left: 440px;
+    margin: 0 auto;
 }
 
 header .header-content .header-content-inner {
@@ -640,7 +636,7 @@ body {
   background-color:#ccc;
 }
 
-#LimitPara{
+.LimitPara{
   width: 160px;
 }
 
@@ -692,3 +688,42 @@ body {
   width: 60px;
   height: 60px;
 }
+
+
+.AddressParent{
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+
+.addressDiv{
+  width: auto;
+  float:left;
+  margin: 10px;
+  width: 545px;
+}
+
+
+.AddressSpan{
+  font-size: 20px;
+}
+
+#ImgSize{
+  height: 282px;
+  width: 320px;
+}
+
+.AddressParentss{
+  overflow: hidden;
+}
+
+.textCenter{
+  text-align: center;
+  margin: auto;
+}
+
+
+
+
+
+

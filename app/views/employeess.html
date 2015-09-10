@@ -8,10 +8,10 @@
             <div class="box">
               <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img ng-src="{{path}}" alt="" class="img-rounded img-responsive"/>
+                        <img ng-src="{{path}}" alt="" class="img-rounded img-responsive" id="ImgSize"/>
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h2>{{userInfo.name}}</h2>
+                        <h2>Hi. My name is {{userInfo.name}} <br>and I'm a {{userInfo.designation}}</h2>
                         <h4>Number: {{userInfo.mobile}}</h4>
                         <h4>Emergency Number: {{userInfo.emergency_contact_no}}</h4>
                         <h4>Email: {{userInfo.email}}</h4>
@@ -21,27 +21,27 @@
                     </div>
                 </div>
             </div>
-            <div class="box">
-              <h3>Address</h3>
-              <div>
+            <div class="box AddressParentss">
+              <div class="AddressParent">
+              <h2>Address</h2>
+              <div class="addressDiv">
+                <span><b>Permanent Address</b></span><br />
+                <p class="LimitPara">{{userInfo.permanent_address}}</p>
+              </div>
+              <div class="addressDiv">
                 <span><b>Present Address</b></span><br />
-                <p id="LimitPara">
+                <p class="LimitPara">
                   {{userInfo.present_address}}
                   {{userInfo.city}}
                   {{userInfo.zipCode}}</p>
-                
-                
               </div>
-              <div>
-                <span><b>Permanent Address</b></span><br />
-                <p id="LimitPara">{{userInfo.permanent_address}}</p>
-              </div>
-              <br>
             
-              
+              </div>
             </div>
-            <br><br>
+            <hr class="HeaderHr">
+            <br>
             <div class="box">
+              <div class="textCenter"><h1>My Servicess</h1></div>
               <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Programming Languages Specialized In</div>

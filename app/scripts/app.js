@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+ //setter for angular app here called chatpayApp
 angular
   .module('chatpayApp', [
     'ngAnimate',

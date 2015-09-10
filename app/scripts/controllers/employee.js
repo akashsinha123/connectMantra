@@ -29,6 +29,7 @@ angular.module('chatpayApp')
     }
   })
   .controller('EmployeeCtrl', function ($scope, $location, $cookieStore, EmployeeService) {
+    
 
     $scope.allLang = [];
     $scope.letterLimit = 180;
@@ -233,6 +234,7 @@ angular.module('chatpayApp')
             birthday : user.dob,
             bloodGroup : user.blood_group,
             presentAddress : user.address,
+            designation : user.designation,
             permanentAddress : user.permanent_address,
             sessionId : $cookieStore.get('sessionId'),
             id: $scope.userrr.id
