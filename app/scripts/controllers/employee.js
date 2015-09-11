@@ -83,7 +83,8 @@ angular.module('chatpayApp')
             EmployeeService.uploadImage(data)
             .then(function(user){
               $scope.path = '/api/' + user;
-
+              $scope.showImageMsg = true;
+              console.log(user);
             })
             .catch(function(err){
                 

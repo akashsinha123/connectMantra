@@ -18,7 +18,7 @@ angular.module('chatpayApp')
         
     }
   })
-  .controller('HomeCtrl', function ($scope, $location, $cookieStore, EmployeeService, $rootScope) {
+  .controller('HomeCtrl', function ($scope, $location, $cookieStore, EmployeeService, $rootScope, $anchorScroll) {
 
     $scope.pageSize = 6;
     $scope.currentPage = 1;
@@ -37,6 +37,15 @@ angular.module('chatpayApp')
     //     $scope.pageSize = 6;
         
     // }
+
+    $scope.gotoBottom = function() {
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('bottom');
+
+      // call $anchorScroll()
+      $anchorScroll();
+    };
 
     $scope.search = function() {
         $scope.isEnable = false;
@@ -219,6 +228,10 @@ angular.module('chatpayApp')
                         val.projects.push(kal);
                      };
                 });
+                if (val.id == $cookieStore.get('userId')) {
+                    $scope.yourAccount = val;
+                    console.log($scope.yourAccount);
+                };
             });
         })
         .catch(function(err){
@@ -234,8 +247,14 @@ angular.module('chatpayApp')
 
 
     $scope.userId = function(id){
-        EmployeeService.user = id;
-        var idd = id.id;
+        if (id) {
+            EmployeeService.user = id;
+            var idd = id.id;
+        }else{
+            EmployeeService.user = $scope.yourAccount;
+            var idd = $scope.yourAccount.id;
+        }
+        
         $location.path('/employee/idd');
     }
 
