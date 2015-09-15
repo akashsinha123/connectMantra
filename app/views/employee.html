@@ -8,9 +8,9 @@
             <div class="box">
               <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img ng-src="{{path}}" type="{{image.file.type}}" alt="" class="img-rounded img-responsive" id="ImgSize" ng-hide="image" />
+                        <img ng-hide="image" ng-src="{{path}}" type="{{image.file.type}}" class="img-rounded img-responsive" id="ImgSize"/>
                         <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" class="img-rounded img-responsive" id="ImgSize"/>
-                        <input type="file" accept="image/*" image="image" ng-show="personalProfile"/>
+                        <input type="file" accept="image/*" image="image" name="image" ng-show="personalProfile"/>
                         <br>
                         <button ng-click="showImage(image)" class="btn btn-default" ng-show="personalProfile">Change Profile Picture</button>
                         <p ng-show="showImageMsg">Image successfully changed</p>

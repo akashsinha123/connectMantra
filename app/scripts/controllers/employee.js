@@ -49,7 +49,6 @@ angular.module('chatpayApp')
 
     if ($scope.userrr.extension) {
         $scope.path = '/api/images/' + $scope.userrr.id + '.' + $scope.userrr.extension;
-        
     }else{
         $scope.path = '../../images/-1.png';
     };
@@ -73,6 +72,7 @@ angular.module('chatpayApp')
     $scope.user = $scope.userrr;
 
      $scope.showImage = function(image){
+        console.log(image);
         if (image) {
             var data = {
                 sessionId : $cookieStore.get('sessionId'),
@@ -80,6 +80,7 @@ angular.module('chatpayApp')
                 extention : image.file.name,
                 userId : $scope.userrr.id
             }
+            console.log(data);
             EmployeeService.uploadImage(data)
             .then(function(user){
               $scope.path = '/api/' + user;

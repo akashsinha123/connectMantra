@@ -15,7 +15,6 @@ angular.module('chatpayApp')
         }else{
             return data;
         }
-        
     }
   })
   .filter('startFrommm', function(){

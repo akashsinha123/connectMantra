@@ -21,7 +21,9 @@ angular
     'angular-md5',
     'luegg.directives',
     'http-auth-interceptor',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'flow',
+    'imageupload'
   ])
   .constant('moment', moment)
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
